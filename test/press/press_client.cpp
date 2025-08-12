@@ -76,6 +76,9 @@ private:
         setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
         setsockopt(sockfd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
         
+        int opt = 1;
+        setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
         if (connect(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
             std::cerr << "Thread " << thread_id << " Request " << request_id << ": connect() failed: " << strerror(errno) << std::endl;
             close(sockfd);
@@ -94,31 +97,24 @@ private:
             return false;
         }
         
-        // 接收响应
+        // 接收响应 - 这是关键
         char buffer[1024];
         ssize_t received = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
         close(sockfd);
         
         if (received > 0) {
             buffer[received] = '\0';
-            // 验证响应是否正确（简单的echo验证）
+            // 验证响应是否正确
             if (std::string(buffer) == message) {
-                return true;
+                return true;  // 只有收到正确响应才算成功
             } else {
-                std::cerr << "Thread " << thread_id << " Request " << request_id << ": response mismatch. Expected: " << message << ", Got: " << buffer << std::endl;
+                std::cerr << "Thread " << thread_id << " Request " << request_id << ": response mismatch" << std::endl;
+                return false;
             }
-        } else if (received == 0) {
-            std::cerr << "Thread " << thread_id << " Request " << request_id << ": connection closed by server" << std::endl;
         } else {
-            // 检查是否是超时错误
-            if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                std::cerr << "Thread " << thread_id << " Request " << request_id << ": recv() timeout" << std::endl;
-            } else {
-                std::cerr << "Thread " << thread_id << " Request " << request_id << ": recv() failed: " << strerror(errno) << std::endl;
-            }
+            // 任何接收失败都算失败
+            return false;
         }
-        
-        return false;
     }
     
     void print_results(long long duration_ms) {

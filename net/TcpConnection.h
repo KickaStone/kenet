@@ -1,13 +1,18 @@
 #ifndef _NET_TCPCONNECTION_H_
 #define _NET_TCPCONNECTION_H_
 
-#include "EventLoop.h"
-#include "Channel.h"
 #include <string>
 #include <string_view>
 #include <memory>
 #include <functional>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <errno.h>
+#include <cstring>
+
 #include "InetAddress.h"
+#include "EventLoop.h"
+#include "Channel.h"
 
 class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
     public:

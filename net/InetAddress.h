@@ -8,7 +8,7 @@
 
 class InetAddress {
 public:
-    InetAddress();
+    InetAddress() = default;
     InetAddress(const std::string& ip, uint16_t port);
     InetAddress(uint16_t port);
     InetAddress(const sockaddr_in& addr);

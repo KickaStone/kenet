@@ -1,7 +1,5 @@
 #include "TcpConnection.h"
-#include <unistd.h>
-#include <errno.h>
-#include <cstring>
+
 
 TcpConnection::TcpConnection(EventLoop* loop, int fd, InetAddress local, InetAddress peer) : loop_(loop), fd_(fd), local_(local), peer_(peer) {
     channel_ = std::make_unique<Channel>(loop_, fd);
@@ -119,7 +117,19 @@ void TcpConnection::handleClose() {
     }
 }
 
+// 处理错误
 void TcpConnection::handleError() {
-    Logger::Error("TcpConnection::handleError: %s", strerror(errno));
+    // erron 其实不可靠，epollerr事件触发时，errno可能已经被其他系统调用修改，不再反映真实原因
+    int error = 0;
+    socklen_t len = sizeof(error);
+    if (getsockopt(fd_, SOL_SOCKET, SO_ERROR, &error, &len) < 0) {
+        Logger::Error("TcpConnection::handleError: getsockopt failed: %s", strerror(errno));
+    } else {
+        Logger::Error("TcpConnection::handleError: socket error: %s", strerror(error));
+    }
     state_ = kDisconnected;
+    channel_->disableAll();
+    if (onClose_) {
+        onClose_(shared_from_this());
+    }
 }
