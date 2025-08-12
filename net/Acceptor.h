@@ -13,12 +13,13 @@ class Acceptor {
         using NewConnFn = std::function<void(int fd, const InetAddress& peer)>;
         Acceptor(EventLoop* loop, const InetAddress& addr);
         void setNewConnCallback(NewConnFn fn) { cb_ = std::move(fn); }
-        void listen(); // bind/listen + channel.enableReading()
+        void Listen(); // bind/listen + channel.enableReading()
     private:
         void handleRead(); // accept 直到 EAGAIN
         EventLoop* loop_;
+        InetAddress addr_;
         int listenfd_;
-        Channel channel_;
+        std::unique_ptr<Channel> channel_;
         NewConnFn cb_;
     };
     

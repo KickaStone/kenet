@@ -1,0 +1,61 @@
+#include "Acceptor.h"
+#include <sys/socket.h>
+#include <unistd.h>
+#include <errno.h>
+
+Acceptor::Acceptor(EventLoop* loop, const InetAddress& addr) : loop_(loop), addr_(addr) {
+    listenfd_ = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
+    if (listenfd_ < 0) {
+        Logger::Fatal("socket failed");
+        exit(1);
+    }
+    channel_ = std::make_unique<Channel>(loop_, listenfd_);
+    channel_->setReadCallback(std::bind(&Acceptor::handleRead, this));
+}
+
+void Acceptor::Listen() {
+    // 设置SO_REUSEADDR
+    int opt = 1;
+    setsockopt(listenfd_, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+    
+    auto addr = addr_.getSockAddr();
+    int ret = bind(listenfd_, (const struct sockaddr*)addr, sizeof(*addr));
+    if (ret < 0) {
+        Logger::Fatal("bind failed: %s (errno: %d)", strerror(errno), errno);
+        exit(1);
+    }
+    channel_->enableReading();
+
+    ret = listen(listenfd_, 1024);
+    if (ret < 0) {
+        Logger::Fatal("listen failed: %s (errno: %d)", strerror(errno), errno);
+        exit(1);
+    }
+}
+
+void Acceptor::handleRead() {
+    if (channel_->revents() & EPOLLIN) {
+        sockaddr_in peerAddr;
+        socklen_t addrLen = sizeof(peerAddr);
+        
+        while (true) {
+            int connfd = accept4(listenfd_, (struct sockaddr*)&peerAddr, &addrLen, SOCK_NONBLOCK | SOCK_CLOEXEC);
+            if (connfd < 0) {
+                if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                    // 没有更多连接可接受
+                    break;
+                } else {
+                    Logger::Error("accept4 failed: %s", strerror(errno));
+                    break;
+                }
+            }
+            
+            if (cb_) {
+                InetAddress peer(peerAddr);
+                cb_(connfd, peer);
+            } else {
+                close(connfd);
+            }
+        }
+    }
+}

@@ -29,6 +29,7 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
         int  fd() const { return fd_; }
     
     private:
+        void sendInLoop(std::string_view data);
         void handleRead();
         void handleWrite();
         void handleClose();
@@ -36,7 +37,7 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
     
         EventLoop* loop_;
         const int fd_;
-        Channel channel_;
+        std::unique_ptr<Channel> channel_;
         enum State { kConnecting, kConnected, kDisconnecting, kDisconnected } state_{kConnecting};
         std::string inBuf_, outBuf_;
         InetAddress local_, peer_;

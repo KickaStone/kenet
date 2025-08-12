@@ -4,8 +4,12 @@
 #include <vector>
 #include <unordered_map>
 #include <sys/epoll.h>
+#include <unistd.h>
 
-#include "Channel.h"
+#include "Logger.h"
+
+// 前向声明
+class Channel;
 
 class Poller {
     public:
@@ -17,6 +21,8 @@ class Poller {
     private:
         int epfd_;
         std::unordered_map<int, Channel*> fd2ch_; // fd -> Channel*
+        static const int MAX_EVENTS = 1024;
+        epoll_event events_[MAX_EVENTS];
     };
     
 
