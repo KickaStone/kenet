@@ -3,6 +3,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "logger/log.h"
+
 TcpServer::TcpServer(EventLoop* loop, const InetAddress& addr) : loop_(loop), acceptor_(loop, addr) {
     acceptor_.setNewConnCallback(
         [this](int fd, const InetAddress& peer) {
@@ -16,7 +18,7 @@ void TcpServer::start() {
 }
 
 void TcpServer::onNewConn(int fd, const InetAddress& peer) {
-    Logger::Info("TcpServer::onNewConn: new connection from %s", peer.toIpPort().c_str());
+    LOG_INFO("TcpServer::onNewConn: new connection from %s", peer.toIpPort().c_str());
     
     // 获取本地地址
     sockaddr_in localAddr;

@@ -1,5 +1,7 @@
 #ifndef SINK_H
 #define SINK_H
+#include <iostream>
+#include "log.h"
 
 enum class Level : uint8_t { Trace, Debug, Info, Warn, Error, Fatal, Off /* 不输出 */ };
 
@@ -51,7 +53,12 @@ public:
             if (final && fsync_on_flush_ && fd_ >= 0) ::fsync(fd_);
             return;
         }
-        (void) ::write(fd_, buf_.data(), buf_.size()); // 生产中应检查返回值
+        if (const ssize_t bytes_written = ::write(fd_, buf_.data(), buf_.size()); bytes_written == -1) {
+            perror("write failed.");
+        }else if (bytes_written < static_cast<ssize_t>(buf_.size())) {
+            std::cerr << "Warning: Only " << bytes_written << " out of " << " bytes written." << std::endl;
+            // do nothing, only record
+        }
         if (fsync_on_flush_ || final) ::fsync(fd_);
         buf_.clear();
     }
@@ -120,7 +127,11 @@ public:
 
     void flush(bool) override {
         if (buf_.empty()) return;
-        (void) ::write(STDERR_FILENO, buf_.data(), buf_.size());
+        if (const ssize_t bytes_written =  ::write(STDERR_FILENO, buf_.data(), buf_.size()); bytes_written == -1) {
+            perror("write failed.");
+        }else if (bytes_written < static_cast<ssize_t>(buf_.size())) {
+            std::cerr << "Warning: Only " << bytes_written << " out of " << " bytes written." << std::endl;
+        }
         buf_.clear();
     }
 

@@ -1,5 +1,6 @@
 #include "Channel.h"
 #include "EventLoop.h"
+#include "logger/log.h"
 
 Channel::Channel(EventLoop* loop, int fd)
     : loop_(loop), fd_(fd) {}
@@ -22,19 +23,19 @@ void Channel::setErrorCallback(Callback cb) {
 
 void Channel::handleEvent(uint32_t revents) {
     if (revents & EPOLLIN) {
-        Logger::Info("Channel::handleEvent: EPOLLIN on fd: %d", fd_);
+        LOG_INFO("Channel::handleEvent: EPOLLIN on fd: %d", fd_);
         if (readCb_) readCb_();
     }
     if (revents & EPOLLOUT) {
-        Logger::Info("Channel::handleEvent: EPOLLOUT on fd: %d", fd_);
+        LOG_INFO("Channel::handleEvent: EPOLLOUT on fd: %d", fd_);
         if (writeCb_) writeCb_();
     }
     if (revents & EPOLLRDHUP) {
-        Logger::Info("Channel::handleEvent: EPOLLRDHUP on fd: %d", fd_);
+        LOG_INFO("Channel::handleEvent: EPOLLRDHUP on fd: %d", fd_);
         if (closeCb_) closeCb_();
     }
     if (revents & EPOLLERR) {
-        Logger::Info("Channel::handleEvent: EPOLLERR on fd: %d", fd_);
+        LOG_INFO("Channel::handleEvent: EPOLLERR on fd: %d", fd_);
         if (errorCb_) errorCb_();
     }
 }

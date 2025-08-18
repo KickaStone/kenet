@@ -1,4 +1,5 @@
 #include "TcpConnection.h"
+#include "logger/log.h"
 
 
 TcpConnection::TcpConnection(EventLoop* loop, int fd, InetAddress local, InetAddress peer) : loop_(loop), fd_(fd), local_(local), peer_(peer) {
@@ -43,7 +44,7 @@ void TcpConnection::sendInLoop(std::string_view data) {
                 outBuf_.append(data.data(), data.size());
                 channel_->enableWriting();
             } else {
-                Logger::Error("TcpConnection::sendInLoop: write failed: %s", strerror(errno));
+                LOG_ERROR("TcpConnection::sendInLoop: write failed: %s", strerror(errno));
             }
         } else if (static_cast<size_t>(n) < data.size()) {
             // 部分写入，剩余部分添加到输出缓冲区
@@ -68,23 +69,23 @@ void TcpConnection::handleRead() {
     if (channel_->revents() & EPOLLIN) {
         char buf[4096];
         ssize_t n = read(fd_, buf, sizeof(buf));
-        Logger::Info("TcpConnection::handleRead: fd=%d, read=%zd", fd_, n);
+        LOG_INFO("TcpConnection::handleRead: fd=%d, read=%zd", fd_, n);
         if (n > 0) {
             if (onMessage_) {
-                Logger::Info("TcpConnection::handleRead: calling onMessage_ with %zu bytes", n);
+                LOG_INFO("TcpConnection::handleRead: calling onMessage_ with %zu bytes", n);
                 onMessage_(shared_from_this(), std::string_view(buf, n));
             } else {
-                Logger::Info("TcpConnection::handleRead: onMessage_ is null");
+                LOG_INFO("TcpConnection::handleRead: onMessage_ is null");
             }
         } else if (n == 0) {
-            Logger::Info("TcpConnection::handleRead: connection closed by peer");
+            LOG_INFO("TcpConnection::handleRead: connection closed by peer");
             handleClose();
         } else {
             if (errno != EAGAIN && errno != EWOULDBLOCK) {
-                Logger::Error("TcpConnection::handleRead: read failed: %s", strerror(errno));
+                LOG_ERROR("TcpConnection::handleRead: read failed: %s", strerror(errno));
                 handleError();
             } else {
-                Logger::Info("TcpConnection::handleRead: EAGAIN/EWOULDBLOCK");
+                LOG_INFO("TcpConnection::handleRead: EAGAIN/EWOULDBLOCK");
             }
         }
     }
@@ -103,7 +104,7 @@ void TcpConnection::handleWrite() {
             }
         } else if (n < 0) {
             if (errno != EAGAIN && errno != EWOULDBLOCK) {
-                Logger::Error("TcpConnection::handleWrite: write failed: %s", strerror(errno));
+                LOG_ERROR("TcpConnection::handleWrite: write failed: %s", strerror(errno));
             }
         }
     }
@@ -123,9 +124,9 @@ void TcpConnection::handleError() {
     int error = 0;
     socklen_t len = sizeof(error);
     if (getsockopt(fd_, SOL_SOCKET, SO_ERROR, &error, &len) < 0) {
-        Logger::Error("TcpConnection::handleError: getsockopt failed: %s", strerror(errno));
+        LOG_ERROR("TcpConnection::handleError: getsockopt failed: %s", strerror(errno));
     } else {
-        Logger::Error("TcpConnection::handleError: socket error: %s", strerror(error));
+        LOG_ERROR("TcpConnection::handleError: socket error: %s", strerror(error));
     }
     state_ = kDisconnected;
     channel_->disableAll();

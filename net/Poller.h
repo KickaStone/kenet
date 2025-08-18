@@ -6,7 +6,6 @@
 #include <sys/epoll.h>
 #include <unistd.h>
 
-#include "Logger.h"
 
 // 前向声明
 class Channel;

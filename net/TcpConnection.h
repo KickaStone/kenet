@@ -5,14 +5,22 @@
 #include <string_view>
 #include <memory>
 #include <functional>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <errno.h>
-#include <cstring>
 
 #include "InetAddress.h"
 #include "EventLoop.h"
 #include "Channel.h"
+
+/**
+ * connection state:
+ * 1. Eventloop 创建 TcpConnection -> kConnecting
+ * 2. TcpServer 调用 TcpConnection::connectEstablished() -> kConnected
+ * 3. TcpConnection::shutdown() ->
+ * 
+ * kDisconnecting: 暂时不用
+ * 其他情况：
+ * 对端关闭导致read()= 0, handleClose() -> kDisconnected
+ * 出错 handleError() -> kDisconnected
+ */
 
 class TcpConnection : public std::enable_shared_from_this<TcpConnection> {
     public:

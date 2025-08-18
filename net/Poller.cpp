@@ -1,11 +1,12 @@
 #include "Poller.h"
 #include "Channel.h"
+#include "logger/log.h"
 
 Poller::Poller()
 {
     epfd_ = epoll_create1(EPOLL_CLOEXEC);
     if (epfd_ == -1) {
-        Logger::Fatal("epoll_create1 failed");
+        LOG_INFO("epoll_create1 failed");
         exit(1);
     }
 }
@@ -45,7 +46,7 @@ void Poller::updateChannel(Channel* ch) {
 int Poller::poll(int timeoutMs, std::vector<Channel*>& active) {
     int nfds = epoll_wait(epfd_, events_, MAX_EVENTS, timeoutMs);
     if (nfds < 0) {
-        Logger::Error("epoll_wait failed");
+        LOG_ERROR("epoll_wait failed");
         return -1;
     }
     for (int i = 0; i < nfds; ++i) {

@@ -3,16 +3,11 @@
 
 #include <functional>
 #include <vector>
-#include <memory>
+
 #include <atomic>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include <vector>
-#include <functional>
-#include <atomic>
-#include <thread>
-#include <mutex>
 #include "Poller.h"
 
 class EventLoop {

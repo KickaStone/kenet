@@ -249,14 +249,33 @@ private:
     }
 
     static void format_time(uint64_t ns, char* buf, size_t N) {
+        // 确保缓冲区足够大
+        if (N < 26) { // 26 是最大长度
+            // 处理错误，例如返回
+            if (buf) {
+                buf[0] = '\0'; // 清空缓冲区
+            }
+            return; // 或者抛出异常，或者返回错误代码
+        }
+
         time_t sec = ns / 1000000000ull;
-        long   us  = (ns % 1000000000ull) / 1000;
+        long us = (ns % 1000000000ull) / 1000;
         tm tmv;
         localtime_r(&sec, &tmv);
-        // yyyy-mm-dd hh:mm:ss.uuuuuu
-        snprintf(buf, N, "%04d-%02d-%02d %02d:%02d:%02d.%06ld",
-                 tmv.tm_year+1900, tmv.tm_mon+1, tmv.tm_mday,
-                 tmv.tm_hour, tmv.tm_min, tmv.tm_sec, us);
+
+        // 使用 snprintf 进行格式化
+        int ret = snprintf(buf, N, "%04d-%02d-%02d %02d:%02d:%02d.%06ld",
+                           tmv.tm_year + 1900, tmv.tm_mon + 1, tmv.tm_mday,
+                           tmv.tm_hour, tmv.tm_min, tmv.tm_sec, us);
+
+        // 检查返回值
+        if (ret < 0) {
+            // 处理 snprintf 失败的情况
+            perror("snprintf failed");
+        } else if (ret >= static_cast<int>(N)) {
+            // 处理截断的情况
+            fprintf(stderr, "Warning: output truncated, wrote %d characters\n", ret);
+        }
     }
 
     void append_line(std::string& out, const Entry& e) {
@@ -335,5 +354,11 @@ private:
     std::atomic<uint32_t> wake_hint_{0};
 };
 
+#define LOG_TRACE(fmt, ...) AsyncLogger<>::instance().logf(Level::Trace, fmt, ##__VA_ARGS__)
+#define LOG_DEBUG(fmt, ...) AsyncLogger<>::instance().logf(Level::Debug, fmt, ##__VA_ARGS__)
+#define LOG_INFO(fmt, ...)  AsyncLogger<>::instance().logf(Level::Info,  fmt, ##__VA_ARGS__)
+#define LOG_WARN(fmt, ...)  AsyncLogger<>::instance().logf(Level::Warn,  fmt, ##__VA_ARGS__)
+#define LOG_ERROR(fmt, ...) AsyncLogger<>::instance().logf(Level::Error, fmt, ##__VA_ARGS__)
+#define LOG_FATAL(fmt, ...) AsyncLogger<>::instance().logf(Level::Fatal, fmt, ##__VA_ARGS__)
 
 #endif //LOG_H

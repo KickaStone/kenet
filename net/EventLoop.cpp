@@ -1,11 +1,12 @@
 #include "EventLoop.h"
 #include "Channel.h"
+#include "logger/log.h"
 
 EventLoop::EventLoop()
     : poller_(), quit_(false) {}
 
 void EventLoop::loop() {
-    Logger::Info("EventLoop::loop: start loop in thread: %lu", std::hash<std::thread::id>{}(tid_));
+    LOG_INFO("EventLoop::loop: start loop in thread: %lu", std::hash<std::thread::id>{}(tid_));
     std::vector<Channel*> activeChannels_;
 
     while (!quit_.load()) {
@@ -18,7 +19,7 @@ void EventLoop::loop() {
         doPendingFuncs();
     }
 
-    Logger::Info("EventLoop::loop: end loop in thread: %lu", std::hash<std::thread::id>{}(tid_));
+    LOG_INFO("EventLoop::loop: end loop in thread: %lu", std::hash<std::thread::id>{}(tid_));
 }
 
 void EventLoop::quit() {

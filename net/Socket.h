@@ -7,7 +7,6 @@
 #include <fcntl.h>
 #include <netinet/tcp.h>
 #include "InetAddress.h"
-#include "Logger.h"
 
 // set non-block
 inline void setNonBlock(int fd) {

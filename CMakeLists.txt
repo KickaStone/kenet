@@ -4,19 +4,21 @@ project(netcore)
 
 # 添加echo_server可执行文件
 add_executable(echo_server 
-    example/echo_server.cpp 
-    net/Logger.cpp 
-    net/InetAddress.cpp
-    net/EventLoop.cpp
-    net/Poller.cpp
-    net/Channel.cpp
-    net/Acceptor.cpp
-    net/TcpConnection.cpp
-    net/TcpServer.cpp
+    example/echo_server.cpp
+        net/InetAddress.cpp
+        net/EventLoop.cpp
+        net/Poller.cpp
+        net/Channel.cpp
+        net/Acceptor.cpp
+        net/TcpConnection.cpp
+        net/TcpServer.cpp
 )
 
 add_executable(echo_client 
-    example/echo_client.cpp 
+    example/echo_client.cpp
+        logger/log.h
+        logger/ring_buffer.h
+        logger/sink.h
 )
 
 # 为echo_server设置编译选项
