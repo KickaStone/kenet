@@ -1,6 +1,6 @@
-#include "Channel.h"
-#include "EventLoop.h"
-#include "logger/log.h"
+#include "../include/Channel.h"
+#include "../include/EventLoop.h"
+#include "../include/logger/log.h"
 
 Channel::Channel(EventLoop* loop, int fd)
     : loop_(loop), fd_(fd) {}

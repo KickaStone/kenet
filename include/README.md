@@ -25,7 +25,7 @@
 
 10轮写入100000条日志
 
-```shell
+```
 Round 1: 157.297 ms to log 1000000 messages.
 Round 2: 107.746 ms to log 1000000 messages.
 Round 3: 106.12 ms to log 1000000 messages.

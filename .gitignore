@@ -42,4 +42,5 @@
 
 
 build/
+cmake-build-debug/
 *.log

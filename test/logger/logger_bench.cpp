@@ -2,7 +2,7 @@
 #include <vector>
 #include <thread>
 #include <chrono>
-#include "../../logger/log.h" // 这里假设你的 AsyncLogger.h 文件包含了需要的类定义
+#include "../../include/log.h"
 
 int main() {
     using Logger = AsyncLogger<512, 4096>;
