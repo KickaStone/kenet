@@ -34,8 +34,8 @@ target_link_libraries(echo_client PRIVATE netcore)
 include(FetchContent)
 FetchContent_Declare(
         googletest
-        URL https://github.com/google/googletest/archive/52eb8108c5bdec04579160ae17225d66034bd723.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG v1.17.0
 )
 
 FetchContent_MakeAvailable(googletest)
