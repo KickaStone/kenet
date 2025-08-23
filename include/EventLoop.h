@@ -28,6 +28,7 @@ class EventLoop {
         std::mutex mutex_;
         std::condition_variable cond_;
         std::vector<std::function<void()>> pendingFuncs_;
+        static const int pollTimeoutMs_ = 1000;
         void doPendingFuncs();
     };
     

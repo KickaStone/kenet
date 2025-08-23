@@ -10,7 +10,7 @@ void EventLoop::loop() {
     std::vector<Channel*> activeChannels_;
 
     while (!quit_.load()) {
-        poller_.poll(1000, activeChannels_);
+        poller_.poll(pollTimeoutMs_, activeChannels_);
 
         for (auto ch : activeChannels_) {
             ch->handleEvent(ch->revents());
@@ -19,6 +19,8 @@ void EventLoop::loop() {
         doPendingFuncs();
     }
 
+    // ensure all pending tasks are executed
+    doPendingFuncs();
     LOG_INFO("EventLoop::loop: end loop in thread: %lu", std::hash<std::thread::id>{}(tid_));
 }
 

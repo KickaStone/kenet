@@ -37,8 +37,8 @@ int main() {
     using Logger = AsyncLogger<512, 4096>;
     Config cfg;
     cfg.path = "server.log";
-    cfg.file_level = Level::Debug;   // 文件从 Debug 开始记
-    cfg.console_level = Level::Warn; // 控制台只打 Warn+
+    cfg.file_level = Level::Debug;   // file log from Debug
+    cfg.console_level = Level::Info; // console log from Info+
     cfg.flush_bytes = 128<<10;
     cfg.flush_interval = std::chrono::milliseconds(100);
     cfg.console_enable_color = true;

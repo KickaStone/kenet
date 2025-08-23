@@ -16,7 +16,7 @@ public:
     void setNewConnCallback(NewConnFn fn) { cb_ = std::move(fn); }
     void Listen();
 private:
-    void handleAccept();                 // accept connections until EAGAIN
+    void handleAccept();               // accept connections until EAGAIN
     EventLoop *loop_;                  // eventloop
     InetAddress addr_;                 // listen address
     int listenfd_;                     // listen socket fd
