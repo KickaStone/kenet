@@ -2,27 +2,23 @@
 #define _NET_POLLER_H_
 
 #include <vector>
-#include <unordered_map>
 #include <sys/epoll.h>
 #include <unistd.h>
 
-
-// 前向声明
 class Channel;
 
-class Poller {
-    public:
-        explicit Poller();
-        ~Poller();
-        void updateChannel(Channel* ch);  // ADD/MOD/DEL
-        void removeChannel(Channel* ch);
-        int poll(int timeoutMs, std::vector<Channel*>& active);
-    private:
-        int epfd_;
-        std::unordered_map<int, Channel*> fd2ch_; // fd -> Channel*
-        static const int MAX_EVENTS = 1024;
-        epoll_event events_[MAX_EVENTS];
-    };
-    
+class Poller
+{
+public:
+    explicit Poller();
+    ~Poller();
+    void updateChannel(Channel *ch);                         // ADD/MOD channel
+    void removeChannel(Channel *ch);                         // DEL channel
+    int poll(int timeoutMs, std::vector<Channel *> &active); // poll events
+private:
+    int epfd_;
+    static const int MAX_EVENTS = 1024;        // max events to poll
+    epoll_event events_[MAX_EVENTS];           // events to poll
+};
 
 #endif

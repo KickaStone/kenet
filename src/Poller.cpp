@@ -18,14 +18,12 @@ Poller::~Poller() {
 void Poller::removeChannel(Channel* ch) {
     // 从epoll中删除fd
     epoll_ctl(epfd_, EPOLL_CTL_DEL, ch->fd(), nullptr);
-    // 从fd2ch_中删除fd
-    fd2ch_.erase(ch->fd());
 }
 
 void Poller::updateChannel(Channel* ch) {
     epoll_event ev{};
     ev.events = ch->events();
-    ev.data.ptr = ch;
+    ev.data.ptr = ch;  // channel data pointer
     
     if (ch->added()) {
         // modify existing fd
@@ -35,12 +33,9 @@ void Poller::updateChannel(Channel* ch) {
         epoll_ctl(epfd_, EPOLL_CTL_ADD, ch->fd(), &ev);
         ch->setAdded(true);
     }
-    
-    fd2ch_[ch->fd()] = ch;
 }
 
-
-// 将epfd上的活跃事件收集到active中
+// collect active events from epfd to active
 int Poller::poll(int timeoutMs, std::vector<Channel*>& active) {
     int nfds = epoll_wait(epfd_, events_, MAX_EVENTS, timeoutMs);
     if (nfds < 0) {
