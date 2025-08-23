@@ -51,8 +51,8 @@ void EventLoop::doPendingFuncs() {
         std::unique_lock<std::mutex> lock(mutex_);
         funcs.swap(pendingFuncs_);
     }
-    // TODO: use thread pool to execute the functions
+    // Use thread pool to execute the functions
     for (auto& func : funcs) {
-        func();
+        threadPool_.enqueue(func);
     }
 }

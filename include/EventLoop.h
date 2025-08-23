@@ -8,6 +8,7 @@
 #include <thread>
 #include <mutex>
 #include "Poller.h"
+#include "threadpool/threadpool.h"
 
 class EventLoop {
     public:
@@ -28,7 +29,7 @@ class EventLoop {
         std::vector<std::function<void()>> pendingFuncs_;
         static const int pollTimeoutMs_ = 1000;
         void doPendingFuncs();
-    };
-    
 
+        ThreadPool threadPool_{4ul};
+};
 #endif
