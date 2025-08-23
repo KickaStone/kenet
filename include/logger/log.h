@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <cstdarg>
 #include <cstdio>
+#include <cstdlib>
 #include <fcntl.h>
 #include <vector>
 
@@ -42,6 +43,18 @@ struct Config {
 
     // console
     bool console_enable_color = true;
+    
+    // 默认配置：只启用控制台输出，level=debug
+    static Config default_config() {
+        Config cfg;
+        cfg.path = "app.log";
+        cfg.file_level = Level::Off;      // 禁用文件输出
+        cfg.console_level = Level::Debug; // 控制台从Debug开始
+        cfg.flush_bytes = 128ull << 10;   // 128KB
+        cfg.flush_interval = std::chrono::milliseconds(100);
+        cfg.console_enable_color = true;
+        return cfg;
+    }
 };
 
 
@@ -58,10 +71,16 @@ class AsyncLogger {
 public:
     static AsyncLogger& instance() {
         static AsyncLogger g;
+        // 自动启动logger（如果还没有启动）
+        if (!g.running_) {
+            g.start();
+            // 注册程序退出时的清理函数
+            std::atexit([]() { AsyncLogger::auto_stop(); });
+        }
         return g;
     }
 
-    void start(Config cfg = {}) {
+    void start(Config cfg = Config::default_config()) {
         std::lock_guard<std::mutex> lk(mu_);
         if (running_) return;
         cfg_ = std::move(cfg);
@@ -73,7 +92,6 @@ public:
 
         console_sink_ = std::make_unique<ConsoleSink>(cfg_.console_enable_color);
         console_sink_->min_level = cfg_.console_level;
-
 
         running_ = true;
         worker_ = std::thread([this]{ run(); });
@@ -92,6 +110,15 @@ public:
     }
 
     ~AsyncLogger() { stop(); }
+    
+    // 程序退出时自动停止logger
+    static void auto_stop() {
+        static bool stopped = false;
+        if (!stopped) {
+            stopped = true;
+            instance().stop();
+        }
+    }
 
     // 可在任意线程调用
     void logf(Level lv, const char* fmt, ...) {
