@@ -1,6 +1,6 @@
-#include "../include/Poller.h"
-#include "../include/Channel.h"
-#include "../include/logger/log.h"
+#include "Poller.h"
+#include "Channel.h"
+#include "logger/log.h"
 
 Poller::Poller()
 {
@@ -23,21 +23,19 @@ void Poller::removeChannel(Channel* ch) {
 }
 
 void Poller::updateChannel(Channel* ch) {
-    // 添加/修改/删除fd
     epoll_event ev{};
     ev.events = ch->events();
     ev.data.ptr = ch;
     
     if (ch->added()) {
-        // 修改已存在的fd
+        // modify existing fd
         epoll_ctl(epfd_, EPOLL_CTL_MOD, ch->fd(), &ev);
     } else {
-        // 添加新的fd
+        // add new fd
         epoll_ctl(epfd_, EPOLL_CTL_ADD, ch->fd(), &ev);
         ch->setAdded(true);
     }
     
-    // 添加/修改/删除fd2ch_
     fd2ch_[ch->fd()] = ch;
 }
 

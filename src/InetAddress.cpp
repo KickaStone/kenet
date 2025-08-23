@@ -1,4 +1,4 @@
-#include "../include/InetAddress.h"
+#include "InetAddress.h"
 
 InetAddress::InetAddress(const std::string& ip, uint16_t port) {
     memset(&addr_, 0, sizeof(addr_));

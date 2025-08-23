@@ -37,7 +37,6 @@ class Channel {
         const int fd_;
         uint32_t events_{0};
         uint32_t revents_{0};
-        // 回调
         Callback readCb_, writeCb_, closeCb_, errorCb_;
         bool added_{false}; // 是否已在 epoll 中
     };

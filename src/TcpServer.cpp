@@ -1,9 +1,9 @@
-#include "../include/TcpServer.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "../include/logger/log.h"
+#include "TcpServer.h"
+#include "logger/log.h"
 
 TcpServer::TcpServer(EventLoop* loop, const InetAddress& addr) : loop_(loop), acceptor_(loop, addr) {
     acceptor_.setNewConnCallback(
@@ -20,13 +20,13 @@ void TcpServer::start() {
 void TcpServer::onNewConn(int fd, const InetAddress& peer) {
     LOG_INFO("TcpServer::onNewConn: new connection from %s", peer.toIpPort().c_str());
     
-    // 获取本地地址
+    // get server local address
     sockaddr_in localAddr;
     socklen_t addrLen = sizeof(localAddr);
     getsockname(fd, (struct sockaddr*)&localAddr, &addrLen);
     InetAddress local(localAddr);
     
-    auto conn = std::make_shared<TcpConnection>(loop_, fd, local, peer);
+    auto conn = std::make_shared<TcpConnection>(loop_, fd, local, peer); // shared_ptr
     conns_.insert({fd, conn});
     conn->setMessageCallback(onMessage_);
     conn->setConnectionCallback(onConn_);

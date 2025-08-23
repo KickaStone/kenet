@@ -8,19 +8,20 @@
 #include "Channel.h"
 #include "InetAddress.h"
 
-class Acceptor {
-    public:
-        using NewConnFn = std::function<void(int fd, const InetAddress& peer)>;
-        Acceptor(EventLoop* loop, const InetAddress& addr);
-        void setNewConnCallback(NewConnFn fn) { cb_ = std::move(fn); }
-        void Listen(); // bind/listen + channel.enableReading()
-    private:
-        void handleRead(); // accept 直到 EAGAIN
-        EventLoop* loop_;
-        InetAddress addr_;
-        int listenfd_;
-        std::unique_ptr<Channel> channel_;
-        NewConnFn cb_;
-    };
-    
+class Acceptor
+{
+public:
+    using NewConnFn = std::function<void(int fd, const InetAddress &peer)>;
+    Acceptor(EventLoop *loop, const InetAddress &addr);
+    void setNewConnCallback(NewConnFn fn) { cb_ = std::move(fn); }
+    void Listen();
+private:
+    void handleAccept();                 // accept connections until EAGAIN
+    EventLoop *loop_;                  // eventloop
+    InetAddress addr_;                 // listen address
+    int listenfd_;                     // listen socket fd
+    std::unique_ptr<Channel> channel_; // channel to accept connections
+    NewConnFn cb_;                     // new connection callback
+};
+
 #endif

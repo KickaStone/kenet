@@ -1,9 +1,9 @@
-#include "../include/Acceptor.h"
+#include "Acceptor.h"
 #include <sys/socket.h>
 #include <unistd.h>
 #include <errno.h>
 
-#include "../include/logger/log.h"
+#include "logger/log.h"
 
 Acceptor::Acceptor(EventLoop* loop, const InetAddress& addr) : loop_(loop), addr_(addr) {
     listenfd_ = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
@@ -12,11 +12,11 @@ Acceptor::Acceptor(EventLoop* loop, const InetAddress& addr) : loop_(loop), addr
         exit(1);
     }
     channel_ = std::make_unique<Channel>(loop_, listenfd_);
-    channel_->setReadCallback(std::bind(&Acceptor::handleRead, this));
+    channel_->setReadCallback(std::bind(&Acceptor::handleAccept, this));
 }
 
 void Acceptor::Listen() {
-    // 设置SO_REUSEADDR
+    // set SO_REUSEADDR
     int opt = 1;
     setsockopt(listenfd_, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
@@ -35,7 +35,7 @@ void Acceptor::Listen() {
     }
 }
 
-void Acceptor::handleRead() {
+void Acceptor::handleAccept() {
     if (channel_->revents() & EPOLLIN) {
         sockaddr_in peerAddr;
         socklen_t addrLen = sizeof(peerAddr);
@@ -44,7 +44,7 @@ void Acceptor::handleRead() {
             int connfd = accept4(listenfd_, (struct sockaddr*)&peerAddr, &addrLen, SOCK_NONBLOCK | SOCK_CLOEXEC);
             if (connfd < 0) {
                 if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                    // 没有更多连接可接受
+                    // no more connections to accept
                     break;
                 }
                 LOG_ERROR("accept4 failed: %s", strerror(errno));
