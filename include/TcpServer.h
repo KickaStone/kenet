@@ -1,5 +1,5 @@
-#ifndef _NET_TCPSERVER_H_
-#define _NET_TCPSERVER_H_
+#ifndef _TCPSERVER_H_
+#define _TCPSERVER_H_
 
 #include "EventLoop.h"
 #include "Acceptor.h"
@@ -11,7 +11,7 @@ class TcpServer {
         TcpServer(EventLoop* loop, const InetAddress& addr);
         void setMessageCallback(TcpConnection::MessageCb cb){ onMessage_ = std::move(cb); }
         void setConnectionCallback(TcpConnection::EventCb cb){ onConn_ = std::move(cb); }
-        void start(); // acceptor.listen()
+        void start() { acceptor_.Listen(); }
     
     private:
         void onNewConn(int fd, const InetAddress& peer);

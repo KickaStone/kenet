@@ -1,5 +1,5 @@
-#ifndef _NET_CHANNEL_H_
-#define _NET_CHANNEL_H_
+#ifndef _CHANNEL_H_
+#define _CHANNEL_H_
 
 #include <functional>
 #include <cstdint>

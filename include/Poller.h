@@ -1,5 +1,5 @@
-#ifndef _NET_POLLER_H_
-#define _NET_POLLER_H_
+#ifndef _POLLER_H_
+#define _POLLER_H_
 
 #include <vector>
 #include <sys/epoll.h>

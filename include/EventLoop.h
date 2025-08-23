@@ -1,5 +1,5 @@
-#ifndef _NET_EVENTLOOP_H_
-#define _NET_EVENTLOOP_H_
+#ifndef _EVENTLOOP_H_
+#define _EVENTLOOP_H_
 
 #include <functional>
 #include <vector>

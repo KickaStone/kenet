@@ -1,5 +1,5 @@
-#ifndef _NET_ACCEPTOR_H_
-#define _NET_ACCEPTOR_H_
+#ifndef _ACCEPTOR_H_
+#define _ACCEPTOR_H_
 
 #include <functional>
 #include <memory>

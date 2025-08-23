@@ -12,6 +12,7 @@
 
 class ThreadPool {
     public:
+    explicit ThreadPool();
     explicit ThreadPool(size_t numThreads);
     ~ThreadPool();
 
@@ -19,22 +20,20 @@ class ThreadPool {
     auto enqueue(F&& f, Args&&... args) -> std::future<typename std::result_of<F(Args...)>::type>;
 
 private:
-    // 线程集合
+    // thread pool
     std::vector<std::thread> workers_;
-    // 任务队列，任务包装为无参void函数
+    // task queue, task packaged as void function
     std::queue<std::function<void()>> tasks_;
 
-    // 同步
+    // sync
     std::mutex mutex_;
     std::condition_variable condition_;
     std::atomic_bool stop_;
 };
 
-/**
- *
- * @param threads 线程池线程数量
- */
-ThreadPool::ThreadPool(size_t threads) : stop_(false) {
+inline ThreadPool::ThreadPool() : ThreadPool(std::thread::hardware_concurrency()) {}
+
+inline ThreadPool::ThreadPool(size_t threads) : stop_(false) {
     for (size_t i = 0; i < threads; ++i) {
         workers_.emplace_back([this] {
             while (!stop_) {
@@ -54,9 +53,6 @@ ThreadPool::ThreadPool(size_t threads) : stop_(false) {
     }
 }
 
-/**
- * 退出
- */
 inline ThreadPool::~ThreadPool() {
     stop_ = true;
     condition_.notify_all();
