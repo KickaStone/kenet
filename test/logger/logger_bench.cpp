@@ -2,7 +2,7 @@
 #include <vector>
 #include <thread>
 #include <chrono>
-#include "../../include/log.h"
+#include "../../include/logger/log.h"
 
 int main() {
     using Logger = AsyncLogger<512, 4096>;

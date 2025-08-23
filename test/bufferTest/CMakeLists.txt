@@ -1,5 +1,5 @@
 add_gtest(buffertest
-        TYPE unit
+        TYPE demo
         SRCS ringBuffer_test.cpp
         LIBS netcore
 )

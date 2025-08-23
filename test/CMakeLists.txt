@@ -12,19 +12,18 @@ function(add_gtest NAME)
         set(AGT_WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     endif()
 
-    include(GoogleTest)
-    # 发现用例并附加属性/标签
-    gtest_discover_tests(${NAME}
-            WORKING_DIRECTORY ${AGT_WORKING_DIRECTORY}
-            PROPERTIES
-            LABELS "${AGT_TYPE};${AGT_LABELS}"       # 例如 unit;net;logger
-            TIMEOUT 30
+    # 使用 add_test 而不是 gtest_discover_tests
+    add_test(NAME ${NAME} COMMAND ${NAME})
+    set_tests_properties(${NAME} PROPERTIES
+        WORKING_DIRECTORY ${AGT_WORKING_DIRECTORY}
+        LABELS "${AGT_TYPE};${AGT_LABELS}"
+        TIMEOUT 30
+        # 确保输出可见
+        ENVIRONMENT "GTEST_COLOR=1"
     )
 
-    # 标记可并行占用的 CPU 数（可选）
-#    set_tests_properties(${NAME} PROPERTIES PROCESSORS 1)
 endfunction()
 
 # 按目录组织测试
 add_subdirectory(bufferTest)
-add_subdirectory(gtestdemo)
+add_subdirectory(unit)
