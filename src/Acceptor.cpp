@@ -11,7 +11,7 @@ Acceptor::Acceptor(EventLoop* loop, const InetAddress& addr) : loop_(loop), addr
         LOG_FATAL("socket failed");
         exit(1);
     }
-    channel_ = std::make_unique<Channel>(loop_, listenfd_);
+    channel_ = std::make_unique<Channel>(&loop_->poller(), listenfd_);
     channel_->setReadCallback(std::bind(&Acceptor::handleAccept, this));
 }
 

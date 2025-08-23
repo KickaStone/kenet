@@ -1,9 +1,9 @@
 #include "Channel.h"
-#include "EventLoop.h"
+#include "Poller.h"
 #include "logger/log.h"
 
-Channel::Channel(EventLoop* loop, int fd)
-    : loop_(loop), fd_(fd) {}
+Channel::Channel(Poller* poller, int fd)
+    : poller_(poller), fd_(fd) {}
 
 void Channel::setReadCallback(Callback cb) {
     readCb_ = cb;
@@ -46,6 +46,6 @@ void Channel::setEvents(uint32_t events) {
 }
 
 void Channel::update() {
-    loop_->updateChannel(this);
+    poller_->updateChannel(this);
 }
     

@@ -6,12 +6,12 @@
 #include <sys/epoll.h>
 
 // 前向声明
-class EventLoop;
+class Poller;
 
 class Channel {
     public:
         using Callback = std::function<void()>;
-        Channel(EventLoop* loop, int fd);
+        Channel(Poller* poller, int fd);
         void setReadCallback(Callback cb);
         void setWriteCallback(Callback cb);
         void setCloseCallback(Callback cb);
@@ -33,7 +33,7 @@ class Channel {
         bool added() const { return added_; }
 
     private:
-        EventLoop* loop_;
+        Poller* poller_;
         const int fd_;
         uint32_t events_{0};
         uint32_t revents_{0};

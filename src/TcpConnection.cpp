@@ -3,7 +3,7 @@
 
 
 TcpConnection::TcpConnection(EventLoop* loop, int fd, InetAddress local, InetAddress peer) : loop_(loop), fd_(fd), local_(local), peer_(peer) {
-    channel_ = std::make_unique<Channel>(loop_, fd);
+    channel_ = std::make_unique<Channel>(&loop_->poller(), fd);
     channel_->setReadCallback(std::bind(&TcpConnection::handleRead, this));
     channel_->setWriteCallback(std::bind(&TcpConnection::handleWrite, this));
     channel_->setCloseCallback(std::bind(&TcpConnection::handleClose, this));

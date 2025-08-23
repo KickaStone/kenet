@@ -7,7 +7,6 @@
 #include <atomic>
 #include <thread>
 #include <mutex>
-#include <condition_variable>
 #include "Poller.h"
 
 class EventLoop {
@@ -26,7 +25,6 @@ class EventLoop {
         std::atomic<bool> quit_{false};
         const std::thread::id tid_ = std::this_thread::get_id(); // 构造时抓取
         std::mutex mutex_;
-        std::condition_variable cond_;
         std::vector<std::function<void()>> pendingFuncs_;
         static const int pollTimeoutMs_ = 1000;
         void doPendingFuncs();
