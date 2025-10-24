@@ -40,4 +40,35 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
+# Doxygen文档生成
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    option(BUILD_DOCS "Build documentation with Doxygen" ON)
+    if(BUILD_DOCS)
+        set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
+        set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/docs)
+        
+        file(MAKE_DIRECTORY ${DOXYGEN_OUT})
+        
+        add_custom_target(docs
+            COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_IN}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            COMMENT "Generating API documentation with Doxygen"
+            VERBATIM
+        )
+        
+        # 添加清理目标
+        add_custom_target(clean-docs
+            COMMAND ${CMAKE_COMMAND} -E remove_directory ${DOXYGEN_OUT}
+            COMMENT "Cleaning documentation"
+        )
+        
+        message(STATUS "Doxygen found: ${DOXYGEN_EXECUTABLE}")
+        message(STATUS "Documentation will be generated in: ${DOXYGEN_OUT}")
+    endif()
+else()
+    message(STATUS "Doxygen not found - documentation will not be generated")
+    message(STATUS "Install Doxygen to generate documentation")
+endif()
+
 add_subdirectory(test)

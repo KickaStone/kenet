@@ -11,3 +11,10 @@ add_gtest(Poller_test
     SRCS Poller_test.cpp
     LABELS Poller
 )
+
+add_gtest(InetAddress_test 
+    TYPE unit
+    LIBS netcore
+    SRCS InetAddress_test.cpp
+    LABELS InetAddress
+)

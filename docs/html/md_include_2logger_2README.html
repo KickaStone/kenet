@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: Logger 使用说明</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Logger 使用说明</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1>快速开始</h1>
+<h2>智能自动管理（推荐）</h2>
+<p>最简单的使用方式，无需任何配置和手动管理：</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;logger/log.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">    <span class="comment">// 直接使用日志，logger会自动启动和停止</span></div>
+<div class="line">    LOG_DEBUG(<span class="stringliteral">&quot;Debug message&quot;</span>);</div>
+<div class="line">    LOG_INFO(<span class="stringliteral">&quot;Info message&quot;</span>);</div>
+<div class="line">    LOG_WARN(<span class="stringliteral">&quot;Warning message&quot;</span>);</div>
+<div class="line">    LOG_ERROR(<span class="stringliteral">&quot;Error message&quot;</span>);</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// 程序退出时logger会自动停止</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2>手动管理（如果需要自定义配置）</h2>
+<p>如果需要自定义配置，可以手动管理生命周期：</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;logger/log.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">    <span class="comment">// 使用默认配置启动logger</span></div>
+<div class="line">    <a class="code hl_class" href="classAsyncLogger.html">AsyncLogger&lt;&gt;::instance</a>().start();</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// 直接使用日志</span></div>
+<div class="line">    LOG_DEBUG(<span class="stringliteral">&quot;Debug message&quot;</span>);</div>
+<div class="line">    LOG_INFO(<span class="stringliteral">&quot;Info message&quot;</span>);</div>
+<div class="line">    LOG_WARN(<span class="stringliteral">&quot;Warning message&quot;</span>);</div>
+<div class="line">    LOG_ERROR(<span class="stringliteral">&quot;Error message&quot;</span>);</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// 停止logger</span></div>
+<div class="line">    <a class="code hl_class" href="classAsyncLogger.html">AsyncLogger&lt;&gt;::instance</a>().stop();</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassAsyncLogger_html"><div class="ttname"><a href="classAsyncLogger.html">AsyncLogger</a></div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00062">log.h:62</a></div></div>
+</div><!-- fragment --><h2>默认配置说明</h2>
+<p>默认配置的特点：</p><ul>
+<li>**只启用控制台输出**：文件输出被禁用（<code>file_level = Level::Off</code>）</li>
+<li>**控制台级别为Debug**：可以看到所有级别的日志</li>
+<li>**启用颜色输出**：控制台日志带有颜色标识</li>
+<li>**刷新间隔**：100ms</li>
+<li>**刷新字节数**：128KB</li>
+</ul>
+<h2>自定义配置</h2>
+<p>如果需要自定义配置，可以传递Config对象：</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;logger/log.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">    <a class="code hl_struct" href="structConfig.html">Config</a> cfg;</div>
+<div class="line">    cfg.path = <span class="stringliteral">&quot;myapp.log&quot;</span>;</div>
+<div class="line">    cfg.file_level = Level::Info;      <span class="comment">// 文件输出从Info开始</span></div>
+<div class="line">    cfg.console_level = Level::Warn;   <span class="comment">// 控制台从Warn开始</span></div>
+<div class="line">    cfg.flush_bytes = 64 &lt;&lt; 10;        <span class="comment">// 64KB</span></div>
+<div class="line">    cfg.flush_interval = std::chrono::milliseconds(200);</div>
+<div class="line">    cfg.console_enable_color = <span class="keyword">true</span>;</div>
+<div class="line">    </div>
+<div class="line">    <a class="code hl_class" href="classAsyncLogger.html">AsyncLogger&lt;&gt;::instance</a>().start(cfg);</div>
+<div class="line">    </div>
+<div class="line">    <span class="comment">// 使用日志...</span></div>
+<div class="line">    </div>
+<div class="line">    <a class="code hl_class" href="classAsyncLogger.html">AsyncLogger&lt;&gt;::instance</a>().stop();</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructConfig_html"><div class="ttname"><a href="structConfig.html">Config</a></div><div class="ttdef"><b>Definition</b> <a href="log_8h_source.html#l00032">log.h:32</a></div></div>
+</div><!-- fragment --><h1>日志级别</h1>
+<ul>
+<li><code>Level::Trace</code> - 最详细的调试信息</li>
+<li><code>Level::Debug</code> - 调试信息</li>
+<li><code>Level::Info</code> - 一般信息</li>
+<li><code>Level::Warn</code> - 警告信息</li>
+<li><code>Level::Error</code> - 错误信息</li>
+<li><code>Level::Fatal</code> - 致命错误</li>
+<li><code>Level::Off</code> - 禁用输出</li>
+</ul>
+<h1>使用方式</h1>
+<h2>宏方式（推荐）</h2>
+<div class="fragment"><div class="line">LOG_DEBUG(<span class="stringliteral">&quot;Debug: %d&quot;</span>, value);</div>
+<div class="line">LOG_INFO(<span class="stringliteral">&quot;Info: %s&quot;</span>, message);</div>
+<div class="line">LOG_WARN(<span class="stringliteral">&quot;Warning: %.2f&quot;</span>, percentage);</div>
+<div class="line">LOG_ERROR(<span class="stringliteral">&quot;Error: %s&quot;</span>, error_msg);</div>
+</div><!-- fragment --><h2>实例方法</h2>
+<div class="fragment"><div class="line"><span class="keyword">auto</span>&amp; logger = <a class="code hl_class" href="classAsyncLogger.html">AsyncLogger&lt;&gt;::instance</a>();</div>
+<div class="line">logger.debug(<span class="stringliteral">&quot;Debug message&quot;</span>);</div>
+<div class="line">logger.info(<span class="stringliteral">&quot;Info message&quot;</span>);</div>
+<div class="line">logger.warn(<span class="stringliteral">&quot;Warning message&quot;</span>);</div>
+<div class="line">logger.error(<span class="stringliteral">&quot;Error message&quot;</span>);</div>
+</div><!-- fragment --><h1>配置选项</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">选项   </th><th class="markdownTableHeadNone">默认值   </th><th class="markdownTableHeadNone">说明    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>path</code>   </td><td class="markdownTableBodyNone">"app.log"   </td><td class="markdownTableBodyNone">日志文件路径    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>file_level</code>   </td><td class="markdownTableBodyNone">Level::Off   </td><td class="markdownTableBodyNone">文件输出级别（默认禁用）    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>console_level</code>   </td><td class="markdownTableBodyNone">Level::Debug   </td><td class="markdownTableBodyNone">控制台输出级别    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>flush_bytes</code>   </td><td class="markdownTableBodyNone">128KB   </td><td class="markdownTableBodyNone">刷新字节数阈值    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>flush_interval</code>   </td><td class="markdownTableBodyNone">100ms   </td><td class="markdownTableBodyNone">刷新时间间隔    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>console_enable_color</code>   </td><td class="markdownTableBodyNone">true   </td><td class="markdownTableBodyNone">是否启用控制台颜色    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>rotate_bytes</code>   </td><td class="markdownTableBodyNone">128MB   </td><td class="markdownTableBodyNone">文件轮转大小    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>fsync_on_flush</code>   </td><td class="markdownTableBodyNone">false   </td><td class="markdownTableBodyNone">是否在刷新时同步到磁盘   </td></tr>
+</table>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: Kenet - 基于Reactor模式的C++网络库</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Kenet - 基于Reactor模式的C++网络库 </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_mainpage"></a> </p><h1>项目简介</h1>
+<p>Kenet是一个基于Reactor模式的C++网络库，实现了事件驱动的网络编程模型。该库提供了高性能、易用的网络编程接口，支持TCP服务器和客户端的开发。</p>
+<h1>核心特性</h1>
+<ul>
+<li>✅ <b>基于epoll的事件驱动</b>: 使用Linux epoll机制实现高效的I/O多路复用</li>
+<li>✅ <b>非阻塞I/O</b>: 全异步非阻塞网络编程模型</li>
+<li>✅ <b>线程安全</b>: 每个EventLoop运行在独立线程中，保证线程安全</li>
+<li>✅ <b>自动内存管理</b>: 智能指针管理连接生命周期</li>
+<li>✅ <b>优雅的错误处理</b>: 完善的异常处理和错误恢复机制</li>
+<li>✅ <b>简洁的API</b>: 易于使用的接口设计</li>
+</ul>
+<h1>架构设计</h1>
+<h2>核心组件</h2>
+<p>Kenet网络库采用Reactor模式，主要包含以下核心组件：</p>
+<h3><a class="el" href="classEventLoop.html">EventLoop</a></h3>
+<p>事件循环的核心，每个I/O线程运行一个EventLoop实例。负责：</p><ul>
+<li>管理事件循环的生命周期</li>
+<li>处理定时器事件</li>
+<li>协调各个组件的协作</li>
+</ul>
+<h3><a class="el" href="classPoller.html">Poller</a></h3>
+<p>对Linux epoll的封装，负责：</p><ul>
+<li>监听文件描述符上的事件</li>
+<li>向EventLoop报告就绪的事件</li>
+<li>管理epoll实例</li>
+</ul>
+<h3><a class="el" href="classChannel.html" title="Channel类是对文件描述符的封装，一个Channel对应一个文件描述符fd。同时Channel类也注册了该fd上的事件回调函数。">Channel</a></h3>
+<p>文件描述符与感兴趣事件的映射，负责：</p><ul>
+<li>封装文件描述符和事件类型</li>
+<li>处理各种事件的回调函数</li>
+<li>管理事件的状态</li>
+</ul>
+<h3><a class="el" href="classAcceptor.html">Acceptor</a></h3>
+<p>接受新连接的组件，负责：</p><ul>
+<li>监听服务器套接字</li>
+<li>接受新的客户端连接</li>
+<li>创建TcpConnection对象</li>
+</ul>
+<h3><a class="el" href="classTcpConnection.html">TcpConnection</a></h3>
+<p>TCP连接的封装，负责：</p><ul>
+<li>管理单个TCP连接的生命周期</li>
+<li>处理数据的发送和接收</li>
+<li>提供连接状态管理</li>
+</ul>
+<h3><a class="el" href="classTcpServer.html">TcpServer</a></h3>
+<p>TCP服务器的封装，负责：</p><ul>
+<li>管理多个TcpConnection</li>
+<li>提供服务器级别的接口</li>
+<li>协调Acceptor和连接管理</li>
+</ul>
+<h2>设计模式</h2>
+<ul>
+<li><b>Reactor模式</b>: 事件驱动，非阻塞I/O</li>
+<li><b>单线程模型</b>: 每个EventLoop运行在独立线程中</li>
+<li><b>回调机制</b>: 通过回调函数处理各种事件</li>
+</ul>
+<h1>快速开始</h1>
+<h2>编译项目</h2>
+<div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
+<div class="line">cmake ..</div>
+<div class="line">make</div>
+</div><!-- fragment --><h2>运行示例</h2>
+<ol type="1">
+<li>启动echo服务器: <div class="fragment"><div class="line">./echo_server</div>
+</div><!-- fragment --></li>
+<li>在另一个终端运行客户端: <div class="fragment"><div class="line">./echo_client</div>
+</div><!-- fragment --></li>
+</ol>
+<h1>使用示例</h1>
+<h2>Echo服务器</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;kenet.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="classEchoServer.html">EchoServer</a> {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <a class="code hl_class" href="classEchoServer.html">EchoServer</a>(<a class="code hl_class" href="classEventLoop.html">EventLoop</a>* loop, <span class="keyword">const</span> <a class="code hl_class" href="classInetAddress.html">InetAddress</a>&amp; addr)</div>
+<div class="line">        : server_(loop, addr) {</div>
+<div class="line">        server_.setMessageCallback(</div>
+<div class="line">            [<span class="keyword">this</span>](<span class="keyword">const</span> TcpConnection::Ptr&amp; conn, std::string_view data) {</div>
+<div class="line">                <span class="comment">// Echo back the received data</span></div>
+<div class="line">                conn-&gt;send(data);</div>
+<div class="line">            }</div>
+<div class="line">        );</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordtype">void</span> start() {</div>
+<div class="line">        server_.start();</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <a class="code hl_class" href="classTcpServer.html">TcpServer</a> server_;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main() {</div>
+<div class="line">    <a class="code hl_class" href="classEventLoop.html">EventLoop</a> loop;</div>
+<div class="line">    <a class="code hl_class" href="classInetAddress.html">InetAddress</a> addr(<span class="stringliteral">&quot;127.0.0.1&quot;</span>, 9000);</div>
+<div class="line">    <a class="code hl_class" href="classEchoServer.html">EchoServer</a> server(&amp;loop, addr);</div>
+<div class="line">    </div>
+<div class="line">    server.start();</div>
+<div class="line">    loop.loop();</div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassEchoServer_html"><div class="ttname"><a href="classEchoServer.html">EchoServer</a></div><div class="ttdef"><b>Definition</b> <a href="echo__server_8cpp_source.html#l00008">echo_server.cpp:8</a></div></div>
+<div class="ttc" id="aclassEventLoop_html"><div class="ttname"><a href="classEventLoop.html">EventLoop</a></div><div class="ttdef"><b>Definition</b> <a href="EventLoop_8h_source.html#l00013">EventLoop.h:13</a></div></div>
+<div class="ttc" id="aclassInetAddress_html"><div class="ttname"><a href="classInetAddress.html">InetAddress</a></div><div class="ttdoc">InetAddress class keeps the address and port for a socket for easy use.</div><div class="ttdef"><b>Definition</b> <a href="InetAddress_8h_source.html#l00018">InetAddress.h:18</a></div></div>
+<div class="ttc" id="aclassTcpServer_html"><div class="ttname"><a href="classTcpServer.html">TcpServer</a></div><div class="ttdef"><b>Definition</b> <a href="TcpServer_8h_source.html#l00009">TcpServer.h:9</a></div></div>
+</div><!-- fragment --><h1>项目结构</h1>
+<div class="fragment"><div class="line">kenet/</div>
+<div class="line">├── include/                 # 头文件目录</div>
+<div class="line">│   ├── EventLoop.h         # 事件循环</div>
+<div class="line">│   ├── Poller.h            # epoll封装</div>
+<div class="line">│   ├── Channel.h           # 事件通道</div>
+<div class="line">│   ├── Acceptor.h          # 连接接受器</div>
+<div class="line">│   ├── TcpConnection.h     # TCP连接</div>
+<div class="line">│   ├── TcpServer.h         # TCP服务器</div>
+<div class="line">│   ├── InetAddress.h       # 网络地址</div>
+<div class="line">│   ├── Socket.h            # 套接字封装</div>
+<div class="line">│   └── logger/             # 日志系统</div>
+<div class="line">├── src/                    # 源文件目录</div>
+<div class="line">│   ├── EventLoop.cpp</div>
+<div class="line">│   ├── Poller.cpp</div>
+<div class="line">│   ├── Channel.cpp</div>
+<div class="line">│   ├── Acceptor.cpp</div>
+<div class="line">│   ├── TcpConnection.cpp</div>
+<div class="line">│   ├── TcpServer.cpp</div>
+<div class="line">│   └── InetAddress.cpp</div>
+<div class="line">├── example/                # 示例代码</div>
+<div class="line">│   ├── echo_server.cpp     # Echo服务器示例</div>
+<div class="line">│   └── echo_client.cpp     # Echo客户端示例</div>
+<div class="line">├── test/                   # 测试代码</div>
+<div class="line">└── docs/                   # 生成的文档</div>
+</div><!-- fragment --><h1>依赖要求</h1>
+<ul>
+<li><b>操作系统</b>: Linux</li>
+<li><b>编译器</b>: 支持C++17的编译器 (GCC 7+ 或 Clang 5+)</li>
+<li><b>依赖库</b>: pthread</li>
+<li><b>构建工具</b>: CMake 3.14+</li>
+</ul>
+<h1>许可证</h1>
+<p>MIT License</p>
+<h1>贡献</h1>
+<p>欢迎提交Issue和Pull Request来改进这个项目。</p>
+<h1>联系方式</h1>
+<p>如有问题或建议，请通过GitHub Issues联系我们。 </p>
+</div></div><!-- PageDoc -->
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

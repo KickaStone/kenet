@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: FileSink类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classFileSink-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">FileSink类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 FileSink 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classFileSink.png" usemap="#FileSink_map" alt=""/>
+  <map id="FileSink_map" name="FileSink_map">
+<area href="structISink.html" alt="ISink" shape="rect" coords="0,0,57,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:abe41f2c2ca9b1f603862c61f0fe63382" id="r_abe41f2c2ca9b1f603862c61f0fe63382"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#abe41f2c2ca9b1f603862c61f0fe63382">FileSink</a> (std::string path, bool fsync_on_flush, size_t rotate_bytes)</td></tr>
+<tr class="separator:abe41f2c2ca9b1f603862c61f0fe63382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac83fa5c111ac35b643f6712e5b52c916" id="r_ac83fa5c111ac35b643f6712e5b52c916"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#ac83fa5c111ac35b643f6712e5b52c916">write</a> (<a class="el" href="structLineView.html">LineView</a> lv) override</td></tr>
+<tr class="separator:ac83fa5c111ac35b643f6712e5b52c916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a891f8b22d5163e453c8735b2257839a4" id="r_a891f8b22d5163e453c8735b2257839a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#a891f8b22d5163e453c8735b2257839a4">flush</a> (bool final) override</td></tr>
+<tr class="separator:a891f8b22d5163e453c8735b2257839a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:a2604d51e63d7bc894cf42290b550e9d4" id="r_a2604d51e63d7bc894cf42290b550e9d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#a2604d51e63d7bc894cf42290b550e9d4">open_file</a> ()</td></tr>
+<tr class="separator:a2604d51e63d7bc894cf42290b550e9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a033b4061420c6bad6a444252c759a0c7" id="r_a033b4061420c6bad6a444252c759a0c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#a033b4061420c6bad6a444252c759a0c7">rotate</a> ()</td></tr>
+<tr class="separator:a033b4061420c6bad6a444252c759a0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:aa34e32911713102f29b0d88f39ab6115" id="r_aa34e32911713102f29b0d88f39ab6115"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#aa34e32911713102f29b0d88f39ab6115">path_</a></td></tr>
+<tr class="separator:aa34e32911713102f29b0d88f39ab6115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8684ace333be9148f45febfcb2007baf" id="r_a8684ace333be9148f45febfcb2007baf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#a8684ace333be9148f45febfcb2007baf">fsync_on_flush_</a> {false}</td></tr>
+<tr class="separator:a8684ace333be9148f45febfcb2007baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59d38e957ed9b3177e1a6fa6148c7882" id="r_a59d38e957ed9b3177e1a6fa6148c7882"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#a59d38e957ed9b3177e1a6fa6148c7882">rotate_bytes_</a> {128ull &lt;&lt; 20}</td></tr>
+<tr class="separator:a59d38e957ed9b3177e1a6fa6148c7882"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affd461eff13102d1b0a25a7bca5d0bd1" id="r_affd461eff13102d1b0a25a7bca5d0bd1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#affd461eff13102d1b0a25a7bca5d0bd1">fd_</a> {-1}</td></tr>
+<tr class="separator:affd461eff13102d1b0a25a7bca5d0bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af123ef50a945b17c01101c08ffa908e4" id="r_af123ef50a945b17c01101c08ffa908e4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#af123ef50a945b17c01101c08ffa908e4">buf_</a></td></tr>
+<tr class="separator:af123ef50a945b17c01101c08ffa908e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99272d21558a760814c50e32abce70cc" id="r_a99272d21558a760814c50e32abce70cc"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileSink.html#a99272d21558a760814c50e32abce70cc">written_</a> {0}</td></tr>
+<tr class="separator:a99272d21558a760814c50e32abce70cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+额外继承的成员函数</h2></td></tr>
+<tr class="inherit_header pub_attribs_structISink"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structISink')"><img src="closed.png" alt="-"/>&#160;Public 属性 继承自 <a class="el" href="structISink.html">ISink</a></td></tr>
+<tr class="memitem:af060c1b4ec9dbdf707dc3040af9d92cf inherit pub_attribs_structISink" id="r_af060c1b4ec9dbdf707dc3040af9d92cf"><td class="memItemLeft" align="right" valign="top">Level&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structISink.html#af060c1b4ec9dbdf707dc3040af9d92cf">min_level</a> {Level::Info}</td></tr>
+<tr class="separator:af060c1b4ec9dbdf707dc3040af9d92cf inherit pub_attribs_structISink"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock">
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00040">40</a> 行定义.</p>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
+<a id="abe41f2c2ca9b1f603862c61f0fe63382" name="abe41f2c2ca9b1f603862c61f0fe63382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe41f2c2ca9b1f603862c61f0fe63382">&#9670;&#160;</a></span>FileSink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FileSink::FileSink </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>fsync_on_flush</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>rotate_bytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00042">42</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a96e1b2058ab4e3450edc5473ece2d332" name="a96e1b2058ab4e3450edc5473ece2d332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96e1b2058ab4e3450edc5473ece2d332">&#9670;&#160;</a></span>~FileSink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FileSink::~FileSink </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00047">47</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a891f8b22d5163e453c8735b2257839a4" name="a891f8b22d5163e453c8735b2257839a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a891f8b22d5163e453c8735b2257839a4">&#9670;&#160;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FileSink::flush </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>final</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>实现了 <a class="el" href="structISink.html">ISink</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00056">56</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2604d51e63d7bc894cf42290b550e9d4" name="a2604d51e63d7bc894cf42290b550e9d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2604d51e63d7bc894cf42290b550e9d4">&#9670;&#160;</a></span>open_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FileSink::open_file </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00072">72</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a033b4061420c6bad6a444252c759a0c7" name="a033b4061420c6bad6a444252c759a0c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a033b4061420c6bad6a444252c759a0c7">&#9670;&#160;</a></span>rotate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FileSink::rotate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00078">78</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac83fa5c111ac35b643f6712e5b52c916" name="ac83fa5c111ac35b643f6712e5b52c916"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac83fa5c111ac35b643f6712e5b52c916">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FileSink::write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structLineView.html">LineView</a>&#160;</td>
+          <td class="paramname"><em>lv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>实现了 <a class="el" href="structISink.html">ISink</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00049">49</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="af123ef50a945b17c01101c08ffa908e4" name="af123ef50a945b17c01101c08ffa908e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af123ef50a945b17c01101c08ffa908e4">&#9670;&#160;</a></span>buf_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FileSink::buf_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00099">99</a> 行定义.</p>
+
+</div>
+</div>
+<a id="affd461eff13102d1b0a25a7bca5d0bd1" name="affd461eff13102d1b0a25a7bca5d0bd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd461eff13102d1b0a25a7bca5d0bd1">&#9670;&#160;</a></span>fd_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int FileSink::fd_ {-1}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00098">98</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8684ace333be9148f45febfcb2007baf" name="a8684ace333be9148f45febfcb2007baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8684ace333be9148f45febfcb2007baf">&#9670;&#160;</a></span>fsync_on_flush_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FileSink::fsync_on_flush_ {false}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00095">95</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa34e32911713102f29b0d88f39ab6115" name="aa34e32911713102f29b0d88f39ab6115"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa34e32911713102f29b0d88f39ab6115">&#9670;&#160;</a></span>path_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FileSink::path_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00094">94</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a59d38e957ed9b3177e1a6fa6148c7882" name="a59d38e957ed9b3177e1a6fa6148c7882"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59d38e957ed9b3177e1a6fa6148c7882">&#9670;&#160;</a></span>rotate_bytes_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t FileSink::rotate_bytes_ {128ull &lt;&lt; 20}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00096">96</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a99272d21558a760814c50e32abce70cc" name="a99272d21558a760814c50e32abce70cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99272d21558a760814c50e32abce70cc">&#9670;&#160;</a></span>written_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t FileSink::written_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="sink_8h_source.html">sink.h</a> 第 <a class="el" href="sink_8h_source.html#l00100">100</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>include/logger/<a class="el" href="sink_8h_source.html">sink.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

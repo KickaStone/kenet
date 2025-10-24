@@ -74,6 +74,8 @@
         "thread": "cpp",
         "charconv": "cpp",
         "span": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "__availability": "cpp",
+        "deque": "cpp"
     }
 }

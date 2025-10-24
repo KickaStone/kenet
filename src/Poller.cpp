@@ -18,6 +18,7 @@ Poller::~Poller() {
 void Poller::removeChannel(Channel* ch) {
     // 从epoll中删除fd
     epoll_ctl(epfd_, EPOLL_CTL_DEL, ch->fd(), nullptr);
+    ch->setAdded(false);
 }
 
 void Poller::updateChannel(Channel* ch) {

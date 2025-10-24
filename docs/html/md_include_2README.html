@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: Async Logger</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Async Logger</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>基于SPSC（单生产者单消费者） ring buffer</p>
+<h1>优化点</h1>
+<h2>1. 锁竞争和上下文切换</h2>
+<ul>
+<li>避免多线程竞争同一锁，不使用全局mutex而是使用SPSC无锁队列，每个线程拥有环形队列；</li>
+<li>写端只有本线程，读端是日志线程；无锁，仅原子索引</li>
+<li>没有CAS/自旋/阻塞</li>
+</ul>
+<h2>2. 优化系统调用</h2>
+<ul>
+<li><code>write()</code>和<code>fwrite()</code>每次调用都要进入内核，频繁写日志syscall开销很大</li>
+<li>使用日志聚合 + 阈值触发，批量写入日志</li>
+</ul>
+<h2>3. 内存分配与拷贝</h2>
+<ul>
+<li>ringbuffer</li>
+</ul>
+<h2>4. 时间戳</h2>
+<ul>
+<li>优化 <code>gettimeofday</code> <code>clock_gettime</code> 与复杂 strftime 字符串格式化</li>
+<li>使用粗粒度时钟<code>CLOCK_REALTIME_COARSE</code>，这是Linux系统中获取时钟的另一个方式，对比<code>CLOCK_REALTIME</code>精度低但速度快</li>
+</ul>
+<h1>Benchmark</h1>
+<p>10轮写入100000条日志</p>
+<div class="fragment"><div class="line">Round 1: 157.297 ms to log 1000000 messages.</div>
+<div class="line">Round 2: 107.746 ms to log 1000000 messages.</div>
+<div class="line">Round 3: 106.12 ms to log 1000000 messages.</div>
+<div class="line">Round 4: 84.7132 ms to log 1000000 messages.</div>
+<div class="line">Round 5: 83.587 ms to log 1000000 messages.</div>
+<div class="line">Round 6: 86.1602 ms to log 1000000 messages.</div>
+<div class="line">Round 7: 84.5947 ms to log 1000000 messages.</div>
+<div class="line">Round 8: 83.1248 ms to log 1000000 messages.</div>
+<div class="line">Round 9: 122.263 ms to log 1000000 messages.</div>
+<div class="line">Round 10: 83.9588 ms to log 1000000 messages.</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

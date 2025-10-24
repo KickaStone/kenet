@@ -13,7 +13,6 @@ TcpServer::TcpServer(EventLoop* loop, const InetAddress& addr) : loop_(loop), ac
     );
 }
 
-
 void TcpServer::onNewConn(int fd, const InetAddress& peer) {
     LOG_INFO("TcpServer::onNewConn: new connection from %s", peer.toIpPort().c_str());
     

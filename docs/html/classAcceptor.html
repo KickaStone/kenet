@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: Acceptor类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classAcceptor-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">Acceptor类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a32f81a85a20d3ee0144af78fc01ecce3" id="r_a32f81a85a20d3ee0144af78fc01ecce3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#a32f81a85a20d3ee0144af78fc01ecce3">NewConnFn</a> = std::function&lt; void(int fd, const <a class="el" href="classInetAddress.html">InetAddress</a> &amp;peer)&gt;</td></tr>
+<tr class="separator:a32f81a85a20d3ee0144af78fc01ecce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ac0807cf67f8bbb54b3210adb84301346" id="r_ac0807cf67f8bbb54b3210adb84301346"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#ac0807cf67f8bbb54b3210adb84301346">Acceptor</a> (<a class="el" href="classEventLoop.html">EventLoop</a> *loop, const <a class="el" href="classInetAddress.html">InetAddress</a> &amp;addr)</td></tr>
+<tr class="separator:ac0807cf67f8bbb54b3210adb84301346"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b13122408084cc1bb3f3d654b290a1" id="r_ae4b13122408084cc1bb3f3d654b290a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#ae4b13122408084cc1bb3f3d654b290a1">setNewConnCallback</a> (NewConnFn fn)</td></tr>
+<tr class="separator:ae4b13122408084cc1bb3f3d654b290a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a539ab090cf80276cbe23eb2047ed5c9b" id="r_a539ab090cf80276cbe23eb2047ed5c9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#a539ab090cf80276cbe23eb2047ed5c9b">Listen</a> ()</td></tr>
+<tr class="separator:a539ab090cf80276cbe23eb2047ed5c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:a96e7d0abc98f17dcf6c6a56066d6f56c" id="r_a96e7d0abc98f17dcf6c6a56066d6f56c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#a96e7d0abc98f17dcf6c6a56066d6f56c">handleAccept</a> ()</td></tr>
+<tr class="separator:a96e7d0abc98f17dcf6c6a56066d6f56c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:aef2f172d99692aa383a163d2cc185afb" id="r_aef2f172d99692aa383a163d2cc185afb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEventLoop.html">EventLoop</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#aef2f172d99692aa383a163d2cc185afb">loop_</a></td></tr>
+<tr class="separator:aef2f172d99692aa383a163d2cc185afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8679af984c19e00cb8d43e6f7ddeab38" id="r_a8679af984c19e00cb8d43e6f7ddeab38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInetAddress.html">InetAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#a8679af984c19e00cb8d43e6f7ddeab38">addr_</a></td></tr>
+<tr class="separator:a8679af984c19e00cb8d43e6f7ddeab38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0fffcf23f61f4e6003cc0ba73e761b" id="r_ada0fffcf23f61f4e6003cc0ba73e761b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#ada0fffcf23f61f4e6003cc0ba73e761b">listenfd_</a></td></tr>
+<tr class="separator:ada0fffcf23f61f4e6003cc0ba73e761b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab92fda461a6e3579ae3d91a4cc3c29ea" id="r_ab92fda461a6e3579ae3d91a4cc3c29ea"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classChannel.html">Channel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#ab92fda461a6e3579ae3d91a4cc3c29ea">channel_</a></td></tr>
+<tr class="separator:ab92fda461a6e3579ae3d91a4cc3c29ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f9d5b00fb50ad3503cf4204446e105" id="r_ae6f9d5b00fb50ad3503cf4204446e105"><td class="memItemLeft" align="right" valign="top">NewConnFn&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAcceptor.html#ae6f9d5b00fb50ad3503cf4204446e105">cb_</a></td></tr>
+<tr class="separator:ae6f9d5b00fb50ad3503cf4204446e105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock">
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00011">11</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a32f81a85a20d3ee0144af78fc01ecce3" name="a32f81a85a20d3ee0144af78fc01ecce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f81a85a20d3ee0144af78fc01ecce3">&#9670;&#160;</a></span>NewConnFn</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using Acceptor::NewConnFn =  std::function&lt;void(int fd, const <a class="el" href="classInetAddress.html">InetAddress</a> &amp;peer)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00014">14</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="ac0807cf67f8bbb54b3210adb84301346" name="ac0807cf67f8bbb54b3210adb84301346"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0807cf67f8bbb54b3210adb84301346">&#9670;&#160;</a></span>Acceptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Acceptor::Acceptor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEventLoop.html">EventLoop</a> *&#160;</td>
+          <td class="paramname"><em>loop</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classInetAddress.html">InetAddress</a> &amp;&#160;</td>
+          <td class="paramname"><em>addr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8cpp_source.html">Acceptor.cpp</a> 第 <a class="el" href="Acceptor_8cpp_source.html#l00008">8</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a96e7d0abc98f17dcf6c6a56066d6f56c" name="a96e7d0abc98f17dcf6c6a56066d6f56c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96e7d0abc98f17dcf6c6a56066d6f56c">&#9670;&#160;</a></span>handleAccept()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Acceptor::handleAccept </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8cpp_source.html">Acceptor.cpp</a> 第 <a class="el" href="Acceptor_8cpp_source.html#l00038">38</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a539ab090cf80276cbe23eb2047ed5c9b" name="a539ab090cf80276cbe23eb2047ed5c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a539ab090cf80276cbe23eb2047ed5c9b">&#9670;&#160;</a></span>Listen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Acceptor::Listen </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8cpp_source.html">Acceptor.cpp</a> 第 <a class="el" href="Acceptor_8cpp_source.html#l00018">18</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae4b13122408084cc1bb3f3d654b290a1" name="ae4b13122408084cc1bb3f3d654b290a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4b13122408084cc1bb3f3d654b290a1">&#9670;&#160;</a></span>setNewConnCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Acceptor::setNewConnCallback </td>
+          <td>(</td>
+          <td class="paramtype">NewConnFn&#160;</td>
+          <td class="paramname"><em>fn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00016">16</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a8679af984c19e00cb8d43e6f7ddeab38" name="a8679af984c19e00cb8d43e6f7ddeab38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8679af984c19e00cb8d43e6f7ddeab38">&#9670;&#160;</a></span>addr_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInetAddress.html">InetAddress</a> Acceptor::addr_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00021">21</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae6f9d5b00fb50ad3503cf4204446e105" name="ae6f9d5b00fb50ad3503cf4204446e105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f9d5b00fb50ad3503cf4204446e105">&#9670;&#160;</a></span>cb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NewConnFn Acceptor::cb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00024">24</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab92fda461a6e3579ae3d91a4cc3c29ea" name="ab92fda461a6e3579ae3d91a4cc3c29ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab92fda461a6e3579ae3d91a4cc3c29ea">&#9670;&#160;</a></span>channel_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classChannel.html">Channel</a>&gt; Acceptor::channel_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ada0fffcf23f61f4e6003cc0ba73e761b" name="ada0fffcf23f61f4e6003cc0ba73e761b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada0fffcf23f61f4e6003cc0ba73e761b">&#9670;&#160;</a></span>listenfd_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Acceptor::listenfd_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00022">22</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aef2f172d99692aa383a163d2cc185afb" name="aef2f172d99692aa383a163d2cc185afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef2f172d99692aa383a163d2cc185afb">&#9670;&#160;</a></span>loop_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEventLoop.html">EventLoop</a>* Acceptor::loop_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Acceptor_8h_source.html">Acceptor.h</a> 第 <a class="el" href="Acceptor_8h_source.html#l00020">20</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>include/<a class="el" href="Acceptor_8h_source.html">Acceptor.h</a></li>
+<li>src/<a class="el" href="Acceptor_8cpp_source.html">Acceptor.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

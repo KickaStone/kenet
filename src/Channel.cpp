@@ -22,6 +22,10 @@ void Channel::setErrorCallback(Callback cb) {
 }
 
 void Channel::handleEvent(uint32_t revents) {
+    /**
+     * @brief 根据发生的事件，调用相应的回调函数。
+     * @param revents 发生的事件。
+     */
     if (revents & EPOLLIN) {
         LOG_INFO("Channel::handleEvent: EPOLLIN on fd: %d", fd_);
         if (readCb_) readCb_();

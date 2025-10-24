@@ -1,0 +1,918 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: TcpConnection类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-types">Private 类型</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classTcpConnection-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">TcpConnection类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 TcpConnection 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classTcpConnection.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a144271f13fca736a19bf42b6d01f62b3" id="r_a144271f13fca736a19bf42b6d01f62b3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a144271f13fca736a19bf42b6d01f62b3">Ptr</a> = std::shared_ptr&lt; <a class="el" href="classTcpConnection.html">TcpConnection</a> &gt;</td></tr>
+<tr class="separator:a144271f13fca736a19bf42b6d01f62b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64f2541b878b162e7cc7f67050f73e6a" id="r_a64f2541b878b162e7cc7f67050f73e6a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a64f2541b878b162e7cc7f67050f73e6a">MessageCb</a> = std::function&lt; void(const Ptr &amp;, std::string_view)&gt;</td></tr>
+<tr class="separator:a64f2541b878b162e7cc7f67050f73e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5961b1b75860166c2b1f8e2f29ad1cac" id="r_a5961b1b75860166c2b1f8e2f29ad1cac"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a5961b1b75860166c2b1f8e2f29ad1cac">EventCb</a> = std::function&lt; void(const Ptr &amp;)&gt;</td></tr>
+<tr class="separator:a5961b1b75860166c2b1f8e2f29ad1cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9a496b4c2f9343030f1b719c0d425fb7" id="r_a9a496b4c2f9343030f1b719c0d425fb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a9a496b4c2f9343030f1b719c0d425fb7">TcpConnection</a> (<a class="el" href="classEventLoop.html">EventLoop</a> *loop, int fd, <a class="el" href="classInetAddress.html">InetAddress</a> local, <a class="el" href="classInetAddress.html">InetAddress</a> peer)</td></tr>
+<tr class="separator:a9a496b4c2f9343030f1b719c0d425fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3766e2cdcd853d4bdc469eda7e7387c4" id="r_a3766e2cdcd853d4bdc469eda7e7387c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a3766e2cdcd853d4bdc469eda7e7387c4">setMessageCallback</a> (MessageCb cb)</td></tr>
+<tr class="separator:a3766e2cdcd853d4bdc469eda7e7387c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884b9804339600ff473d53c921d4c293" id="r_a884b9804339600ff473d53c921d4c293"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a884b9804339600ff473d53c921d4c293">setConnectionCallback</a> (EventCb cb)</td></tr>
+<tr class="separator:a884b9804339600ff473d53c921d4c293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaf17e75b61a6b7ed711f9298fb5bd92" id="r_aeaf17e75b61a6b7ed711f9298fb5bd92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#aeaf17e75b61a6b7ed711f9298fb5bd92">setCloseCallback</a> (EventCb cb)</td></tr>
+<tr class="separator:aeaf17e75b61a6b7ed711f9298fb5bd92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a265a8ff1c22b5d05c6922afa66584c32" id="r_a265a8ff1c22b5d05c6922afa66584c32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a265a8ff1c22b5d05c6922afa66584c32">setWriteCompleteCallback</a> (EventCb cb)</td></tr>
+<tr class="separator:a265a8ff1c22b5d05c6922afa66584c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a826b9bedbada31515c742ec84073692a" id="r_a826b9bedbada31515c742ec84073692a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a826b9bedbada31515c742ec84073692a">connectEstablished</a> ()</td></tr>
+<tr class="separator:a826b9bedbada31515c742ec84073692a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a974677e92ec0feb5e9bedb4c375e27f3" id="r_a974677e92ec0feb5e9bedb4c375e27f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a974677e92ec0feb5e9bedb4c375e27f3">send</a> (std::string_view data)</td></tr>
+<tr class="separator:a974677e92ec0feb5e9bedb4c375e27f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31045160bc889d5d7bdea5ae2e57896d" id="r_a31045160bc889d5d7bdea5ae2e57896d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a31045160bc889d5d7bdea5ae2e57896d">shutdown</a> ()</td></tr>
+<tr class="separator:a31045160bc889d5d7bdea5ae2e57896d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e84515e47a3d52f841787bea58a1c54" id="r_a7e84515e47a3d52f841787bea58a1c54"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a7e84515e47a3d52f841787bea58a1c54">fd</a> () const</td></tr>
+<tr class="separator:a7e84515e47a3d52f841787bea58a1c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
+Private 类型</h2></td></tr>
+<tr class="memitem:a56dd5356769b2665967e1e56ecd16442" id="r_a56dd5356769b2665967e1e56ecd16442"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>State</b> { <b>kConnecting</b>
+, <b>kConnected</b>
+, <b>kDisconnecting</b>
+, <b>kDisconnected</b>
+ }</td></tr>
+<tr class="separator:a56dd5356769b2665967e1e56ecd16442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:a3e07ee9100d0391de3b01a602d9bd12d" id="r_a3e07ee9100d0391de3b01a602d9bd12d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a3e07ee9100d0391de3b01a602d9bd12d">sendInLoop</a> (std::string_view data)</td></tr>
+<tr class="separator:a3e07ee9100d0391de3b01a602d9bd12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d0b52fd12a065628b45ff3890051cdb" id="r_a1d0b52fd12a065628b45ff3890051cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a1d0b52fd12a065628b45ff3890051cdb">handleRead</a> ()</td></tr>
+<tr class="separator:a1d0b52fd12a065628b45ff3890051cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54077990874b646067d5baaa9abd6e93" id="r_a54077990874b646067d5baaa9abd6e93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a54077990874b646067d5baaa9abd6e93">handleWrite</a> ()</td></tr>
+<tr class="separator:a54077990874b646067d5baaa9abd6e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40d75e60b1b0f4808592e95be97919ab" id="r_a40d75e60b1b0f4808592e95be97919ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a40d75e60b1b0f4808592e95be97919ab">handleClose</a> ()</td></tr>
+<tr class="separator:a40d75e60b1b0f4808592e95be97919ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2443e7e6d3e04a6c27f148ada44c058a" id="r_a2443e7e6d3e04a6c27f148ada44c058a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a2443e7e6d3e04a6c27f148ada44c058a">handleError</a> ()</td></tr>
+<tr class="separator:a2443e7e6d3e04a6c27f148ada44c058a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:a1bbf3f69db6b42e51aa10dfa9a5ac6e0" id="r_a1bbf3f69db6b42e51aa10dfa9a5ac6e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEventLoop.html">EventLoop</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a1bbf3f69db6b42e51aa10dfa9a5ac6e0">loop_</a></td></tr>
+<tr class="separator:a1bbf3f69db6b42e51aa10dfa9a5ac6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82394ded31e0fca7bf24fa9cb5830f07" id="r_a82394ded31e0fca7bf24fa9cb5830f07"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a82394ded31e0fca7bf24fa9cb5830f07">fd_</a></td></tr>
+<tr class="separator:a82394ded31e0fca7bf24fa9cb5830f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35cc4cf382252b5714b53c2e0880c032" id="r_a35cc4cf382252b5714b53c2e0880c032"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classChannel.html">Channel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a35cc4cf382252b5714b53c2e0880c032">channel_</a></td></tr>
+<tr class="separator:a35cc4cf382252b5714b53c2e0880c032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd13f9237671b06112de0ebf0630baeb" id="r_afd13f9237671b06112de0ebf0630baeb"><td class="memItemLeft" align="right" valign="top"><a id="afd13f9237671b06112de0ebf0630baeb" name="afd13f9237671b06112de0ebf0630baeb"></a>
+enum TcpConnection::State&#160;</td><td class="memItemRight" valign="bottom"><b>kConnecting</b></td></tr>
+<tr class="separator:afd13f9237671b06112de0ebf0630baeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5ae4c583216d35fec11d285e3bfa2a3" id="r_ac5ae4c583216d35fec11d285e3bfa2a3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#ac5ae4c583216d35fec11d285e3bfa2a3">inBuf_</a></td></tr>
+<tr class="separator:ac5ae4c583216d35fec11d285e3bfa2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f6369dad31fe51a76ee0b673f00b7d" id="r_ac4f6369dad31fe51a76ee0b673f00b7d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#ac4f6369dad31fe51a76ee0b673f00b7d">outBuf_</a></td></tr>
+<tr class="separator:ac4f6369dad31fe51a76ee0b673f00b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a333bb190487dd091fd448ed068fd4186" id="r_a333bb190487dd091fd448ed068fd4186"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInetAddress.html">InetAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a333bb190487dd091fd448ed068fd4186">local_</a></td></tr>
+<tr class="separator:a333bb190487dd091fd448ed068fd4186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae443c0a81a842863a1b1955bf6953b2b" id="r_ae443c0a81a842863a1b1955bf6953b2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInetAddress.html">InetAddress</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#ae443c0a81a842863a1b1955bf6953b2b">peer_</a></td></tr>
+<tr class="separator:ae443c0a81a842863a1b1955bf6953b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3c1b738dddcdb1a6842a9a2e54b90c" id="r_acd3c1b738dddcdb1a6842a9a2e54b90c"><td class="memItemLeft" align="right" valign="top">MessageCb&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#acd3c1b738dddcdb1a6842a9a2e54b90c">onMessage_</a></td></tr>
+<tr class="separator:acd3c1b738dddcdb1a6842a9a2e54b90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19597539c2c435fb50bf2a248ffe87a8" id="r_a19597539c2c435fb50bf2a248ffe87a8"><td class="memItemLeft" align="right" valign="top">EventCb&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a19597539c2c435fb50bf2a248ffe87a8">onConn_</a></td></tr>
+<tr class="separator:a19597539c2c435fb50bf2a248ffe87a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af289d10b88dfd389954740057ce7351a" id="r_af289d10b88dfd389954740057ce7351a"><td class="memItemLeft" align="right" valign="top">EventCb&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#af289d10b88dfd389954740057ce7351a">onClose_</a></td></tr>
+<tr class="separator:af289d10b88dfd389954740057ce7351a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1da60df70b5df7b7c1ac874ba3f195bc" id="r_a1da60df70b5df7b7c1ac874ba3f195bc"><td class="memItemLeft" align="right" valign="top">EventCb&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTcpConnection.html#a1da60df70b5df7b7c1ac874ba3f195bc">onWriteComplete_</a></td></tr>
+<tr class="separator:a1da60df70b5df7b7c1ac874ba3f195bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock">
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00013">13</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a5961b1b75860166c2b1f8e2f29ad1cac" name="a5961b1b75860166c2b1f8e2f29ad1cac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5961b1b75860166c2b1f8e2f29ad1cac">&#9670;&#160;</a></span>EventCb</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using TcpConnection::EventCb =  std::function&lt;void(const Ptr &amp;)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00018">18</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a64f2541b878b162e7cc7f67050f73e6a" name="a64f2541b878b162e7cc7f67050f73e6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64f2541b878b162e7cc7f67050f73e6a">&#9670;&#160;</a></span>MessageCb</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using TcpConnection::MessageCb =  std::function&lt;void(const Ptr &amp;, std::string_view)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00017">17</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a144271f13fca736a19bf42b6d01f62b3" name="a144271f13fca736a19bf42b6d01f62b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a144271f13fca736a19bf42b6d01f62b3">&#9670;&#160;</a></span>Ptr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using TcpConnection::Ptr =  std::shared_ptr&lt;<a class="el" href="classTcpConnection.html">TcpConnection</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00016">16</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员枚举类型说明</h2>
+<a id="a56dd5356769b2665967e1e56ecd16442" name="a56dd5356769b2665967e1e56ecd16442"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56dd5356769b2665967e1e56ecd16442">&#9670;&#160;</a></span>State</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum TcpConnection::State</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00043">43</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a9a496b4c2f9343030f1b719c0d425fb7" name="a9a496b4c2f9343030f1b719c0d425fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a496b4c2f9343030f1b719c0d425fb7">&#9670;&#160;</a></span>TcpConnection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TcpConnection::TcpConnection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEventLoop.html">EventLoop</a> *&#160;</td>
+          <td class="paramname"><em>loop</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classInetAddress.html">InetAddress</a>&#160;</td>
+          <td class="paramname"><em>local</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classInetAddress.html">InetAddress</a>&#160;</td>
+          <td class="paramname"><em>peer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00005">5</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a57f0a40516d8bc7f6c83de77b730cf29" name="a57f0a40516d8bc7f6c83de77b730cf29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57f0a40516d8bc7f6c83de77b730cf29">&#9670;&#160;</a></span>~TcpConnection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TcpConnection::~TcpConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00013">13</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a826b9bedbada31515c742ec84073692a" name="a826b9bedbada31515c742ec84073692a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a826b9bedbada31515c742ec84073692a">&#9670;&#160;</a></span>connectEstablished()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::connectEstablished </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00017">17</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7e84515e47a3d52f841787bea58a1c54" name="a7e84515e47a3d52f841787bea58a1c54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e84515e47a3d52f841787bea58a1c54">&#9670;&#160;</a></span>fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int TcpConnection::fd </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00031">31</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a40d75e60b1b0f4808592e95be97919ab" name="a40d75e60b1b0f4808592e95be97919ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d75e60b1b0f4808592e95be97919ab">&#9670;&#160;</a></span>handleClose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::handleClose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00113">113</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2443e7e6d3e04a6c27f148ada44c058a" name="a2443e7e6d3e04a6c27f148ada44c058a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2443e7e6d3e04a6c27f148ada44c058a">&#9670;&#160;</a></span>handleError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::handleError </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00122">122</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1d0b52fd12a065628b45ff3890051cdb" name="a1d0b52fd12a065628b45ff3890051cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d0b52fd12a065628b45ff3890051cdb">&#9670;&#160;</a></span>handleRead()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::handleRead </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00068">68</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a54077990874b646067d5baaa9abd6e93" name="a54077990874b646067d5baaa9abd6e93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54077990874b646067d5baaa9abd6e93">&#9670;&#160;</a></span>handleWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::handleWrite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00094">94</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a974677e92ec0feb5e9bedb4c375e27f3" name="a974677e92ec0feb5e9bedb4c375e27f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a974677e92ec0feb5e9bedb4c375e27f3">&#9670;&#160;</a></span>send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::send </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00025">25</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3e07ee9100d0391de3b01a602d9bd12d" name="a3e07ee9100d0391de3b01a602d9bd12d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e07ee9100d0391de3b01a602d9bd12d">&#9670;&#160;</a></span>sendInLoop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::sendInLoop </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00037">37</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aeaf17e75b61a6b7ed711f9298fb5bd92" name="aeaf17e75b61a6b7ed711f9298fb5bd92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaf17e75b61a6b7ed711f9298fb5bd92">&#9670;&#160;</a></span>setCloseCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::setCloseCallback </td>
+          <td>(</td>
+          <td class="paramtype">EventCb&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00025">25</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a884b9804339600ff473d53c921d4c293" name="a884b9804339600ff473d53c921d4c293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884b9804339600ff473d53c921d4c293">&#9670;&#160;</a></span>setConnectionCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::setConnectionCallback </td>
+          <td>(</td>
+          <td class="paramtype">EventCb&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00024">24</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3766e2cdcd853d4bdc469eda7e7387c4" name="a3766e2cdcd853d4bdc469eda7e7387c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3766e2cdcd853d4bdc469eda7e7387c4">&#9670;&#160;</a></span>setMessageCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::setMessageCallback </td>
+          <td>(</td>
+          <td class="paramtype">MessageCb&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a265a8ff1c22b5d05c6922afa66584c32" name="a265a8ff1c22b5d05c6922afa66584c32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a265a8ff1c22b5d05c6922afa66584c32">&#9670;&#160;</a></span>setWriteCompleteCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::setWriteCompleteCallback </td>
+          <td>(</td>
+          <td class="paramtype">EventCb&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00026">26</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a31045160bc889d5d7bdea5ae2e57896d" name="a31045160bc889d5d7bdea5ae2e57896d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31045160bc889d5d7bdea5ae2e57896d">&#9670;&#160;</a></span>shutdown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TcpConnection::shutdown </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a> 第 <a class="el" href="TcpConnection_8cpp_source.html#l00060">60</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a35cc4cf382252b5714b53c2e0880c032" name="a35cc4cf382252b5714b53c2e0880c032"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35cc4cf382252b5714b53c2e0880c032">&#9670;&#160;</a></span>channel_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classChannel.html">Channel</a>&gt; TcpConnection::channel_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00042">42</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a82394ded31e0fca7bf24fa9cb5830f07" name="a82394ded31e0fca7bf24fa9cb5830f07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82394ded31e0fca7bf24fa9cb5830f07">&#9670;&#160;</a></span>fd_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int TcpConnection::fd_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00041">41</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac5ae4c583216d35fec11d285e3bfa2a3" name="ac5ae4c583216d35fec11d285e3bfa2a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5ae4c583216d35fec11d285e3bfa2a3">&#9670;&#160;</a></span>inBuf_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string TcpConnection::inBuf_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00050">50</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a333bb190487dd091fd448ed068fd4186" name="a333bb190487dd091fd448ed068fd4186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a333bb190487dd091fd448ed068fd4186">&#9670;&#160;</a></span>local_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInetAddress.html">InetAddress</a> TcpConnection::local_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00051">51</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1bbf3f69db6b42e51aa10dfa9a5ac6e0" name="a1bbf3f69db6b42e51aa10dfa9a5ac6e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bbf3f69db6b42e51aa10dfa9a5ac6e0">&#9670;&#160;</a></span>loop_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEventLoop.html">EventLoop</a>* TcpConnection::loop_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00040">40</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af289d10b88dfd389954740057ce7351a" name="af289d10b88dfd389954740057ce7351a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af289d10b88dfd389954740057ce7351a">&#9670;&#160;</a></span>onClose_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventCb TcpConnection::onClose_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00054">54</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a19597539c2c435fb50bf2a248ffe87a8" name="a19597539c2c435fb50bf2a248ffe87a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19597539c2c435fb50bf2a248ffe87a8">&#9670;&#160;</a></span>onConn_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventCb TcpConnection::onConn_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00054">54</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acd3c1b738dddcdb1a6842a9a2e54b90c" name="acd3c1b738dddcdb1a6842a9a2e54b90c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd3c1b738dddcdb1a6842a9a2e54b90c">&#9670;&#160;</a></span>onMessage_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MessageCb TcpConnection::onMessage_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00053">53</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1da60df70b5df7b7c1ac874ba3f195bc" name="a1da60df70b5df7b7c1ac874ba3f195bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1da60df70b5df7b7c1ac874ba3f195bc">&#9670;&#160;</a></span>onWriteComplete_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">EventCb TcpConnection::onWriteComplete_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00054">54</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac4f6369dad31fe51a76ee0b673f00b7d" name="ac4f6369dad31fe51a76ee0b673f00b7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f6369dad31fe51a76ee0b673f00b7d">&#9670;&#160;</a></span>outBuf_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string TcpConnection::outBuf_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00050">50</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ae443c0a81a842863a1b1955bf6953b2b" name="ae443c0a81a842863a1b1955bf6953b2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae443c0a81a842863a1b1955bf6953b2b">&#9670;&#160;</a></span>peer_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInetAddress.html">InetAddress</a> TcpConnection::peer_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a> 第 <a class="el" href="TcpConnection_8h_source.html#l00051">51</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>include/<a class="el" href="TcpConnection_8h_source.html">TcpConnection.h</a></li>
+<li>src/<a class="el" href="TcpConnection_8cpp_source.html">TcpConnection.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

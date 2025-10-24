@@ -8,6 +8,9 @@
 // 前向声明
 class Poller;
 
+/**
+ * @brief Channel类是对文件描述符的封装，一个Channel对应一个文件描述符fd。同时Channel类也注册了该fd上的事件回调函数。
+ */
 class Channel {
     public:
         using Callback = std::function<void()>;
@@ -33,10 +36,25 @@ class Channel {
         bool added() const { return added_; }
 
     private:
+        /**
+         * @brief 拥有该Channel的Poller。
+         */
         Poller* poller_;
+        /**
+         * @brief 该Channel对应的文件描述符fd。
+         */
         const int fd_;
+        /**
+         * @brief 该Channel上注册的事件。
+         */
         uint32_t events_{0};
+        /**
+         * @brief 该Channel上发生的事件。
+         */
         uint32_t revents_{0};
+        /**
+         * @brief 该Channel上注册的读事件回调函数。
+         */
         Callback readCb_, writeCb_, closeCb_, errorCb_;
         bool added_{false}; // 是否已在 epoll 中
     };

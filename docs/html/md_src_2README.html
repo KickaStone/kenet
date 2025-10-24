@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: 架构</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">架构</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1>NetCore（Reactor 子系统）</h1>
+<ul>
+<li>EventLoop：每个 I/O 线程一个循环，封装 epoll/kqueue；负责事件分发、定时器轮询、跨线程任务队列（eventfd）。</li>
+<li>Poller：对 epoll 的薄封装（ET/oneshot 可选）。</li>
+<li>Channel：FD 与感兴趣事件（读/写/错误/关闭）的映射，回调在 <a class="el" href="classEventLoop.html">EventLoop</a> 线程执行。</li>
+<li>TimerQueue：分层时间轮或小根堆（连接空闲、ACK 超时、应用超时）。</li>
+<li>Buffer：IOBuffer（readv/writev 友好，支持零拷贝片段）+ FlatBuffer（短消息）。支持水位线、scatter/gather。</li>
+</ul>
+<h1>模型</h1>
+<div class="fragment"><div class="line">┌─────────────────────────────────────────────────────────────┐</div>
+<div class="line">│                   Application Layer                         │</div>
+<div class="line">├─────────────────────────────────────────────────────────────┤</div>
+<div class="line">│  TcpServer                                                  │</div>
+<div class="line">│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          │</div>
+<div class="line">│  │TcpConnection│  │TcpConnection│  │TcpConnection│          │</div>
+<div class="line">│  └─────────────┘  └─────────────┘  └─────────────┘          │</div>
+<div class="line">├─────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                   Event Abstraction                         │</div>
+<div class="line">├─────────────────────────────────────────────────────────────┤</div>
+<div class="line">│  Acceptor      Channel      Channel      Channel            │</div>
+<div class="line">│  ┌─────────┐   ┌─────────┐  ┌─────────┐  ┌─────────┐        │</div>
+<div class="line">│  │ Channel │   │ Event   │  │ Event   │  │ Event   │        │</div>
+<div class="line">│  └─────────┘   │ Loop    │  │ Loop    │  │ Loop    │        │</div>
+<div class="line">│                └─────────┘  └─────────┘  └─────────┘        │</div>
+<div class="line">├─────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                    Event Loop                               │</div>
+<div class="line">├─────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                    EventLoop                                │</div>
+<div class="line">│                ┌─────────────────┐                          │</div>
+<div class="line">│                │     Poller      │                          │</div>
+<div class="line">│                │  ┌───────────┐  │                          │</div>
+<div class="line">│                │  │   epoll   │  │                          │</div>
+<div class="line">│                │  └───────────┘  │                          │</div>
+<div class="line">│                └─────────────────┘                          │</div>
+<div class="line">├─────────────────────────────────────────────────────────────┤</div>
+<div class="line">│                    系统调用层 (System Calls)                 │</div>
+<div class="line">├─────────────────────────────────────────────────────────────┤</div>
+<div class="line">│  Socket API    InetAddress    Logger                        │</div>
+<div class="line">└─────────────────────────────────────────────────────────────┘</div>
+</div><!-- fragment --><h1>处理流程</h1>
+<h2>服务器启动</h2>
+<div class="fragment"><div class="line">应用程序启动</div>
+<div class="line">    ↓</div>
+<div class="line">EventLoop 创建</div>
+<div class="line">    ↓</div>
+<div class="line">TcpServer 创建 (包含 Acceptor)</div>
+<div class="line">    ↓</div>
+<div class="line">TcpServer::start() 调用</div>
+<div class="line">    ↓</div>
+<div class="line">Acceptor::Listen() 执行</div>
+<div class="line">    ├── socket() 创建监听套接字 (非阻塞)</div>
+<div class="line">    ├── setsockopt(SO_REUSEADDR) 设置地址重用</div>
+<div class="line">    ├── bind() 绑定地址和端口</div>
+<div class="line">    ├── listen() 开始监听</div>
+<div class="line">    └── channel_-&gt;enableReading() 注册到 epoll</div>
+<div class="line">    ↓</div>
+<div class="line">EventLoop::loop() 启动事件循环</div>
+<div class="line">    ↓</div>
+<div class="line">epoll_wait() 等待事件</div>
+</div><!-- fragment --><h2>连接建立</h2>
+<div class="fragment"><div class="line">客户端发起连接请求</div>
+<div class="line">    ↓</div>
+<div class="line">epoll 检测到监听套接字可读事件</div>
+<div class="line">    ↓</div>
+<div class="line">EventLoop::loop() 调用 poller_.poll()</div>
+<div class="line">    ↓</div>
+<div class="line">Poller::poll() 返回活跃的 Channel</div>
+<div class="line">    ↓</div>
+<div class="line">Channel::handleEvent() 处理事件</div>
+<div class="line">    ↓</div>
+<div class="line">Acceptor::handleRead() 被调用</div>
+<div class="line">    ↓</div>
+<div class="line">accept4() 接受新连接 (非阻塞)</div>
+<div class="line">    ↓</div>
+<div class="line">创建 InetAddress 对象 (客户端地址)</div>
+<div class="line">    ↓</div>
+<div class="line">调用 Acceptor 的回调函数 cb_(connfd, peer)</div>
+<div class="line">    ↓</div>
+<div class="line">TcpServer::onNewConn() 被调用</div>
+<div class="line">    ├── 获取本地地址 (getsockname)</div>
+<div class="line">    ├── 创建 TcpConnection 对象</div>
+<div class="line">    ├── 设置各种回调函数</div>
+<div class="line">    ├── 添加到连接映射表 conns_</div>
+<div class="line">    └── 调用 connectEstablished()</div>
+<div class="line">        ↓</div>
+<div class="line">        TcpConnection::connectEstablished()</div>
+<div class="line">        ├── 设置状态为 kConnected</div>
+<div class="line">        ├── channel_-&gt;enableReading() 注册读事件</div>
+<div class="line">        └── 调用连接建立回调 onConn_</div>
+</div><!-- fragment --><h2>数据读写</h2>
+<div class="fragment"><div class="line">客户端发送数据</div>
+<div class="line">    ↓</div>
+<div class="line">epoll 检测到连接套接字可读事件</div>
+<div class="line">    ↓</div>
+<div class="line">EventLoop::loop() 分发事件</div>
+<div class="line">    ↓</div>
+<div class="line">TcpConnection::handleRead() 被调用</div>
+<div class="line">    ↓</div>
+<div class="line">read() 读取数据</div>
+<div class="line">    ├── 读取成功 (n &gt; 0)</div>
+<div class="line">    │   └── 调用 onMessage_ 回调处理数据</div>
+<div class="line">    ├── 连接关闭 (n == 0)</div>
+<div class="line">    │   └── 调用 handleClose()</div>
+<div class="line">    └── 读取失败 (n &lt; 0)</div>
+<div class="line">        ├── EAGAIN/EWOULDBLOCK: 继续等待</div>
+<div class="line">        └── 其他错误: 调用 handleError()</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">应用程序调用 TcpConnection::send()</div>
+<div class="line">    ↓</div>
+<div class="line">检查是否在 EventLoop 线程中</div>
+<div class="line">    ├── 是: 直接调用 sendInLoop()</div>
+<div class="line">    └── 否: 通过 runInLoop() 排队执行</div>
+<div class="line">        ↓</div>
+<div class="line">        TcpConnection::sendInLoop()</div>
+<div class="line">        ├── 检查输出缓冲区是否为空</div>
+<div class="line">        │   ├── 空: 直接调用 write()</div>
+<div class="line">        │   │   ├── 写入成功: 完成</div>
+<div class="line">        │   │   ├── 部分写入: 剩余数据加入缓冲区</div>
+<div class="line">        │   │   └── 缓冲区满: 数据加入缓冲区，启用写事件</div>
+<div class="line">        │   └── 非空: 数据直接加入缓冲区</div>
+<div class="line">        └── 等待 epoll 写事件</div>
+<div class="line">            ↓</div>
+<div class="line">            TcpConnection::handleWrite()</div>
+<div class="line">            ├── write() 写入缓冲区数据</div>
+<div class="line">            ├── 更新缓冲区状态</div>
+<div class="line">            ├── 缓冲区空: 禁用写事件</div>
+<div class="line">            └── 调用 onWriteComplete_ 回调</div>
+</div><!-- fragment --><h2>连接关闭</h2>
+<div class="fragment"><div class="line">连接关闭触发 (客户端断开/错误/主动关闭)</div>
+<div class="line">    ↓</div>
+<div class="line">epoll 检测到关闭事件 (EPOLLRDHUP/EPOLLERR)</div>
+<div class="line">    ↓</div>
+<div class="line">TcpConnection::handleClose() 或 handleError()</div>
+<div class="line">    ├── 设置状态为 kDisconnected</div>
+<div class="line">    ├── channel_-&gt;disableAll() 取消所有事件监听</div>
+<div class="line">    └── 调用 onClose_ 回调</div>
+<div class="line">        ↓</div>
+<div class="line">        TcpServer::removeConn() 被调用</div>
+<div class="line">        ├── 从连接映射表 conns_ 中移除</div>
+<div class="line">        └── 连接对象自动析构</div>
+<div class="line">            ↓</div>
+<div class="line">            TcpConnection::~TcpConnection()</div>
+<div class="line">            └── channel_-&gt;disableAll() 确保清理</div>
+</div><!-- fragment --><h1>TODO</h1>
+<ul>
+<li>[ ] 优雅关闭</li>
+<li>[ ] 多线程模型</li>
+<li>[ ] 线程池</li>
+<li>[ ] 异步日志</li>
+</ul>
+<p><b>高级特性</b></p>
+<ol type="1">
+<li>监控</li>
+<li>协议拔插</li>
+<li>易用性API</li>
+<li>连接池</li>
+<li>多路复用 </li>
+</ol>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

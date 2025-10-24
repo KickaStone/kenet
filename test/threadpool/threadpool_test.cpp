@@ -4,10 +4,10 @@
 #include <vector>
 
 int main() {
-    ThreadPool pool(4);
+    ThreadPool pool(4ul);
     std::vector<std::future<int>> results;
 
-    for (int i = 0;i<10;++i) {
+    for (size_t i = 0;i<10;++i) {
         results.emplace_back(
             pool.enqueue([i]() {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));

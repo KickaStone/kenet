@@ -1,0 +1,864 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: Channel类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classChannel-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">Channel类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Channel类是对文件描述符的封装，一个Channel对应一个文件描述符fd。同时Channel类也注册了该fd上的事件回调函数。  
+ <a href="classChannel.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Channel_8h_source.html">Channel.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a26303bf00a7773313756708c4ba67a98" id="r_a26303bf00a7773313756708c4ba67a98"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a26303bf00a7773313756708c4ba67a98">Callback</a> = std::function&lt; void()&gt;</td></tr>
+<tr class="separator:a26303bf00a7773313756708c4ba67a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a708148b99cb4812c30f6c3aa25457d16" id="r_a708148b99cb4812c30f6c3aa25457d16"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a708148b99cb4812c30f6c3aa25457d16">Channel</a> (<a class="el" href="classPoller.html">Poller</a> *poller, int fd)</td></tr>
+<tr class="separator:a708148b99cb4812c30f6c3aa25457d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46155da49362658b5607b9331f68d7ab" id="r_a46155da49362658b5607b9331f68d7ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a46155da49362658b5607b9331f68d7ab">setReadCallback</a> (Callback cb)</td></tr>
+<tr class="separator:a46155da49362658b5607b9331f68d7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0993f95dc1be18384ef80ae822c5f6f7" id="r_a0993f95dc1be18384ef80ae822c5f6f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a0993f95dc1be18384ef80ae822c5f6f7">setWriteCallback</a> (Callback cb)</td></tr>
+<tr class="separator:a0993f95dc1be18384ef80ae822c5f6f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0871ef783a4ea95d50ccecb7a5db4f36" id="r_a0871ef783a4ea95d50ccecb7a5db4f36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a0871ef783a4ea95d50ccecb7a5db4f36">setCloseCallback</a> (Callback cb)</td></tr>
+<tr class="separator:a0871ef783a4ea95d50ccecb7a5db4f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54860b160885fc1e1b1a087a00389846" id="r_a54860b160885fc1e1b1a087a00389846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a54860b160885fc1e1b1a087a00389846">setErrorCallback</a> (Callback cb)</td></tr>
+<tr class="separator:a54860b160885fc1e1b1a087a00389846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc08365e0d0b3a7e4cf4e04443dbb03a" id="r_acc08365e0d0b3a7e4cf4e04443dbb03a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#acc08365e0d0b3a7e4cf4e04443dbb03a">enableReading</a> ()</td></tr>
+<tr class="separator:acc08365e0d0b3a7e4cf4e04443dbb03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ef8a99073efa7b067af922bbcf85e0" id="r_a60ef8a99073efa7b067af922bbcf85e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a60ef8a99073efa7b067af922bbcf85e0">enableWriting</a> ()</td></tr>
+<tr class="separator:a60ef8a99073efa7b067af922bbcf85e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68dda6f460ae3a36ba22bb8302758fb1" id="r_a68dda6f460ae3a36ba22bb8302758fb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a68dda6f460ae3a36ba22bb8302758fb1">disableWriting</a> ()</td></tr>
+<tr class="separator:a68dda6f460ae3a36ba22bb8302758fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ad2561fc06669eaf745a93b7738ee94" id="r_a2ad2561fc06669eaf745a93b7738ee94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a2ad2561fc06669eaf745a93b7738ee94">disableAll</a> ()</td></tr>
+<tr class="separator:a2ad2561fc06669eaf745a93b7738ee94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46a6b75a6034ebac72a4868ed943ad05" id="r_a46a6b75a6034ebac72a4868ed943ad05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a46a6b75a6034ebac72a4868ed943ad05">update</a> ()</td></tr>
+<tr class="separator:a46a6b75a6034ebac72a4868ed943ad05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1e535b4a525e05e3ac1fd377b616664" id="r_ab1e535b4a525e05e3ac1fd377b616664"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#ab1e535b4a525e05e3ac1fd377b616664">handleEvent</a> (uint32_t revents)</td></tr>
+<tr class="separator:ab1e535b4a525e05e3ac1fd377b616664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c5c301869726d0dabba8ebe084b2408" id="r_a5c5c301869726d0dabba8ebe084b2408"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a5c5c301869726d0dabba8ebe084b2408">fd</a> () const</td></tr>
+<tr class="separator:a5c5c301869726d0dabba8ebe084b2408"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02dfaa2fd988b61b3afe6f338251f6e6" id="r_a02dfaa2fd988b61b3afe6f338251f6e6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a02dfaa2fd988b61b3afe6f338251f6e6">events</a> () const</td></tr>
+<tr class="separator:a02dfaa2fd988b61b3afe6f338251f6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad591b7a8401c2851e8cedc45ca93ebc2" id="r_ad591b7a8401c2851e8cedc45ca93ebc2"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#ad591b7a8401c2851e8cedc45ca93ebc2">revents</a> () const</td></tr>
+<tr class="separator:ad591b7a8401c2851e8cedc45ca93ebc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0bbd66300b62fa136b8ec189ebf509a" id="r_ac0bbd66300b62fa136b8ec189ebf509a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#ac0bbd66300b62fa136b8ec189ebf509a">setEvents</a> (uint32_t events)</td></tr>
+<tr class="separator:ac0bbd66300b62fa136b8ec189ebf509a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadacc967c8e0f46337b190f538be9402" id="r_aadacc967c8e0f46337b190f538be9402"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#aadacc967c8e0f46337b190f538be9402">setRevents</a> (uint32_t revents)</td></tr>
+<tr class="separator:aadacc967c8e0f46337b190f538be9402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883f2c3cd90be74cdbe30c3090036141" id="r_a883f2c3cd90be74cdbe30c3090036141"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a883f2c3cd90be74cdbe30c3090036141">setAdded</a> (bool added)</td></tr>
+<tr class="separator:a883f2c3cd90be74cdbe30c3090036141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e568436a0e056cb820219ad6c7b54d2" id="r_a7e568436a0e056cb820219ad6c7b54d2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a7e568436a0e056cb820219ad6c7b54d2">added</a> () const</td></tr>
+<tr class="separator:a7e568436a0e056cb820219ad6c7b54d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:acbdb78e9206bff16329dc23989a424d8" id="r_acbdb78e9206bff16329dc23989a424d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPoller.html">Poller</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#acbdb78e9206bff16329dc23989a424d8">poller_</a></td></tr>
+<tr class="memdesc:acbdb78e9206bff16329dc23989a424d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">拥有该Channel的Poller。  <br /></td></tr>
+<tr class="separator:acbdb78e9206bff16329dc23989a424d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a7eb7be52a664f556c210e18df16d71" id="r_a0a7eb7be52a664f556c210e18df16d71"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a0a7eb7be52a664f556c210e18df16d71">fd_</a></td></tr>
+<tr class="memdesc:a0a7eb7be52a664f556c210e18df16d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">该Channel对应的文件描述符fd。  <br /></td></tr>
+<tr class="separator:a0a7eb7be52a664f556c210e18df16d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67783d64fd2047b4e8d7f6f89391c70e" id="r_a67783d64fd2047b4e8d7f6f89391c70e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a67783d64fd2047b4e8d7f6f89391c70e">events_</a> {0}</td></tr>
+<tr class="memdesc:a67783d64fd2047b4e8d7f6f89391c70e"><td class="mdescLeft">&#160;</td><td class="mdescRight">该Channel上注册的事件。  <br /></td></tr>
+<tr class="separator:a67783d64fd2047b4e8d7f6f89391c70e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e39bb4dcb0def987d9af279199096f" id="r_af9e39bb4dcb0def987d9af279199096f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#af9e39bb4dcb0def987d9af279199096f">revents_</a> {0}</td></tr>
+<tr class="memdesc:af9e39bb4dcb0def987d9af279199096f"><td class="mdescLeft">&#160;</td><td class="mdescRight">该Channel上发生的事件。  <br /></td></tr>
+<tr class="separator:af9e39bb4dcb0def987d9af279199096f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5061cca1236d3a5ffd870eecfedd56a2" id="r_a5061cca1236d3a5ffd870eecfedd56a2"><td class="memItemLeft" align="right" valign="top">Callback&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a5061cca1236d3a5ffd870eecfedd56a2">readCb_</a></td></tr>
+<tr class="memdesc:a5061cca1236d3a5ffd870eecfedd56a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">该Channel上注册的读事件回调函数。  <br /></td></tr>
+<tr class="separator:a5061cca1236d3a5ffd870eecfedd56a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad19b5875f5a0865f9d71b451dfbc4768" id="r_ad19b5875f5a0865f9d71b451dfbc4768"><td class="memItemLeft" align="right" valign="top">Callback&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#ad19b5875f5a0865f9d71b451dfbc4768">writeCb_</a></td></tr>
+<tr class="separator:ad19b5875f5a0865f9d71b451dfbc4768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc5b30e8f1b6a8b1c6fee9608f6738d" id="r_acfc5b30e8f1b6a8b1c6fee9608f6738d"><td class="memItemLeft" align="right" valign="top">Callback&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#acfc5b30e8f1b6a8b1c6fee9608f6738d">closeCb_</a></td></tr>
+<tr class="separator:acfc5b30e8f1b6a8b1c6fee9608f6738d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a378dcf90813cb25ed25d6a749f1f069a" id="r_a378dcf90813cb25ed25d6a749f1f069a"><td class="memItemLeft" align="right" valign="top">Callback&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a378dcf90813cb25ed25d6a749f1f069a">errorCb_</a></td></tr>
+<tr class="separator:a378dcf90813cb25ed25d6a749f1f069a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b83f3028c0022fe3ff07703e9b9d13b" id="r_a0b83f3028c0022fe3ff07703e9b9d13b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classChannel.html#a0b83f3028c0022fe3ff07703e9b9d13b">added_</a> {false}</td></tr>
+<tr class="separator:a0b83f3028c0022fe3ff07703e9b9d13b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>Channel类是对文件描述符的封装，一个Channel对应一个文件描述符fd。同时Channel类也注册了该fd上的事件回调函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00014">14</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a26303bf00a7773313756708c4ba67a98" name="a26303bf00a7773313756708c4ba67a98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26303bf00a7773313756708c4ba67a98">&#9670;&#160;</a></span>Callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using Channel::Callback =  std::function&lt;void()&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00016">16</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a708148b99cb4812c30f6c3aa25457d16" name="a708148b99cb4812c30f6c3aa25457d16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a708148b99cb4812c30f6c3aa25457d16">&#9670;&#160;</a></span>Channel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Channel::Channel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classPoller.html">Poller</a> *&#160;</td>
+          <td class="paramname"><em>poller</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00005">5</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a7e568436a0e056cb820219ad6c7b54d2" name="a7e568436a0e056cb820219ad6c7b54d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e568436a0e056cb820219ad6c7b54d2">&#9670;&#160;</a></span>added()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Channel::added </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00036">36</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2ad2561fc06669eaf745a93b7738ee94" name="a2ad2561fc06669eaf745a93b7738ee94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad2561fc06669eaf745a93b7738ee94">&#9670;&#160;</a></span>disableAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::disableAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00026">26</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a68dda6f460ae3a36ba22bb8302758fb1" name="a68dda6f460ae3a36ba22bb8302758fb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68dda6f460ae3a36ba22bb8302758fb1">&#9670;&#160;</a></span>disableWriting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::disableWriting </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00025">25</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acc08365e0d0b3a7e4cf4e04443dbb03a" name="acc08365e0d0b3a7e4cf4e04443dbb03a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc08365e0d0b3a7e4cf4e04443dbb03a">&#9670;&#160;</a></span>enableReading()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::enableReading </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a60ef8a99073efa7b067af922bbcf85e0" name="a60ef8a99073efa7b067af922bbcf85e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60ef8a99073efa7b067af922bbcf85e0">&#9670;&#160;</a></span>enableWriting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::enableWriting </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00024">24</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a02dfaa2fd988b61b3afe6f338251f6e6" name="a02dfaa2fd988b61b3afe6f338251f6e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02dfaa2fd988b61b3afe6f338251f6e6">&#9670;&#160;</a></span>events()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Channel::events </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00031">31</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5c5c301869726d0dabba8ebe084b2408" name="a5c5c301869726d0dabba8ebe084b2408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c5c301869726d0dabba8ebe084b2408">&#9670;&#160;</a></span>fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Channel::fd </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00030">30</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab1e535b4a525e05e3ac1fd377b616664" name="ab1e535b4a525e05e3ac1fd377b616664"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1e535b4a525e05e3ac1fd377b616664">&#9670;&#160;</a></span>handleEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::handleEvent </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>revents</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>根据发生的事件，调用相应的回调函数。 </p><dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">revents</td><td>发生的事件。</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00024">24</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad591b7a8401c2851e8cedc45ca93ebc2" name="ad591b7a8401c2851e8cedc45ca93ebc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad591b7a8401c2851e8cedc45ca93ebc2">&#9670;&#160;</a></span>revents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Channel::revents </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00032">32</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a883f2c3cd90be74cdbe30c3090036141" name="a883f2c3cd90be74cdbe30c3090036141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a883f2c3cd90be74cdbe30c3090036141">&#9670;&#160;</a></span>setAdded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::setAdded </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>added</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00035">35</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0871ef783a4ea95d50ccecb7a5db4f36" name="a0871ef783a4ea95d50ccecb7a5db4f36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0871ef783a4ea95d50ccecb7a5db4f36">&#9670;&#160;</a></span>setCloseCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::setCloseCallback </td>
+          <td>(</td>
+          <td class="paramtype">Callback&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00016">16</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a54860b160885fc1e1b1a087a00389846" name="a54860b160885fc1e1b1a087a00389846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54860b160885fc1e1b1a087a00389846">&#9670;&#160;</a></span>setErrorCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::setErrorCallback </td>
+          <td>(</td>
+          <td class="paramtype">Callback&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00020">20</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac0bbd66300b62fa136b8ec189ebf509a" name="ac0bbd66300b62fa136b8ec189ebf509a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0bbd66300b62fa136b8ec189ebf509a">&#9670;&#160;</a></span>setEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::setEvents </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>events</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00049">49</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a46155da49362658b5607b9331f68d7ab" name="a46155da49362658b5607b9331f68d7ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46155da49362658b5607b9331f68d7ab">&#9670;&#160;</a></span>setReadCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::setReadCallback </td>
+          <td>(</td>
+          <td class="paramtype">Callback&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00008">8</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aadacc967c8e0f46337b190f538be9402" name="aadacc967c8e0f46337b190f538be9402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadacc967c8e0f46337b190f538be9402">&#9670;&#160;</a></span>setRevents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::setRevents </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>revents</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00034">34</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0993f95dc1be18384ef80ae822c5f6f7" name="a0993f95dc1be18384ef80ae822c5f6f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0993f95dc1be18384ef80ae822c5f6f7">&#9670;&#160;</a></span>setWriteCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::setWriteCallback </td>
+          <td>(</td>
+          <td class="paramtype">Callback&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00012">12</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a46a6b75a6034ebac72a4868ed943ad05" name="a46a6b75a6034ebac72a4868ed943ad05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46a6b75a6034ebac72a4868ed943ad05">&#9670;&#160;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Channel::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8cpp_source.html">Channel.cpp</a> 第 <a class="el" href="Channel_8cpp_source.html#l00053">53</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a0b83f3028c0022fe3ff07703e9b9d13b" name="a0b83f3028c0022fe3ff07703e9b9d13b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b83f3028c0022fe3ff07703e9b9d13b">&#9670;&#160;</a></span>added_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Channel::added_ {false}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00059">59</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acfc5b30e8f1b6a8b1c6fee9608f6738d" name="acfc5b30e8f1b6a8b1c6fee9608f6738d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfc5b30e8f1b6a8b1c6fee9608f6738d">&#9670;&#160;</a></span>closeCb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Callback Channel::closeCb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a378dcf90813cb25ed25d6a749f1f069a" name="a378dcf90813cb25ed25d6a749f1f069a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a378dcf90813cb25ed25d6a749f1f069a">&#9670;&#160;</a></span>errorCb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Callback Channel::errorCb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a67783d64fd2047b4e8d7f6f89391c70e" name="a67783d64fd2047b4e8d7f6f89391c70e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67783d64fd2047b4e8d7f6f89391c70e">&#9670;&#160;</a></span>events_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Channel::events_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>该Channel上注册的事件。 </p>
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00050">50</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0a7eb7be52a664f556c210e18df16d71" name="a0a7eb7be52a664f556c210e18df16d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a7eb7be52a664f556c210e18df16d71">&#9670;&#160;</a></span>fd_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Channel::fd_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>该Channel对应的文件描述符fd。 </p>
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00046">46</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acbdb78e9206bff16329dc23989a424d8" name="acbdb78e9206bff16329dc23989a424d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbdb78e9206bff16329dc23989a424d8">&#9670;&#160;</a></span>poller_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPoller.html">Poller</a>* Channel::poller_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拥有该Channel的Poller。 </p>
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00042">42</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5061cca1236d3a5ffd870eecfedd56a2" name="a5061cca1236d3a5ffd870eecfedd56a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5061cca1236d3a5ffd870eecfedd56a2">&#9670;&#160;</a></span>readCb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Callback Channel::readCb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>该Channel上注册的读事件回调函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af9e39bb4dcb0def987d9af279199096f" name="af9e39bb4dcb0def987d9af279199096f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9e39bb4dcb0def987d9af279199096f">&#9670;&#160;</a></span>revents_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Channel::revents_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>该Channel上发生的事件。 </p>
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00054">54</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad19b5875f5a0865f9d71b451dfbc4768" name="ad19b5875f5a0865f9d71b451dfbc4768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad19b5875f5a0865f9d71b451dfbc4768">&#9670;&#160;</a></span>writeCb_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Callback Channel::writeCb_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="Channel_8h_source.html">Channel.h</a> 第 <a class="el" href="Channel_8h_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>include/<a class="el" href="Channel_8h_source.html">Channel.h</a></li>
+<li>src/<a class="el" href="Channel_8cpp_source.html">Channel.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

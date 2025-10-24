@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Kenet: src/Channel.cpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Kenet<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">基于Reactor模式的C++网络库</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Channel.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;Channel.h&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;Poller.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;logger/log.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>Channel::Channel(<a class="code hl_class" href="classPoller.html">Poller</a>* poller, <span class="keywordtype">int</span> fd)</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    : poller_(poller), fd_(fd) {}</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> Channel::setReadCallback(Callback cb) {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_variable" href="classChannel.html#a5061cca1236d3a5ffd870eecfedd56a2">readCb_</a> = cb;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>}</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">void</span> Channel::setWriteCallback(Callback cb) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    writeCb_ = cb;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> Channel::setCloseCallback(Callback cb) {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    closeCb_ = cb;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">void</span> Channel::setErrorCallback(Callback cb) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    errorCb_ = cb;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classChannel.html#ab1e535b4a525e05e3ac1fd377b616664">   24</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classChannel.html#ab1e535b4a525e05e3ac1fd377b616664">Channel::handleEvent</a>(uint32_t revents) {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">// 根据发生的事件，调用相应的回调函数</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordflow">if</span> (revents &amp; EPOLLIN) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        LOG_INFO(<span class="stringliteral">&quot;Channel::handleEvent: EPOLLIN on fd: %d&quot;</span>, <a class="code hl_variable" href="classChannel.html#a0a7eb7be52a664f556c210e18df16d71">fd_</a>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="classChannel.html#a5061cca1236d3a5ffd870eecfedd56a2">readCb_</a>) <a class="code hl_variable" href="classChannel.html#a5061cca1236d3a5ffd870eecfedd56a2">readCb_</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (revents &amp; EPOLLOUT) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        LOG_INFO(<span class="stringliteral">&quot;Channel::handleEvent: EPOLLOUT on fd: %d&quot;</span>, <a class="code hl_variable" href="classChannel.html#a0a7eb7be52a664f556c210e18df16d71">fd_</a>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">if</span> (writeCb_) writeCb_();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (revents &amp; EPOLLRDHUP) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        LOG_INFO(<span class="stringliteral">&quot;Channel::handleEvent: EPOLLRDHUP on fd: %d&quot;</span>, <a class="code hl_variable" href="classChannel.html#a0a7eb7be52a664f556c210e18df16d71">fd_</a>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">if</span> (closeCb_) closeCb_();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (revents &amp; EPOLLERR) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        LOG_INFO(<span class="stringliteral">&quot;Channel::handleEvent: EPOLLERR on fd: %d&quot;</span>, <a class="code hl_variable" href="classChannel.html#a0a7eb7be52a664f556c210e18df16d71">fd_</a>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">if</span> (errorCb_) errorCb_();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
+</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keywordtype">void</span> Channel::setEvents(uint32_t events) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_variable" href="classChannel.html#a67783d64fd2047b4e8d7f6f89391c70e">events_</a> = events;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keywordtype">void</span> Channel::update() {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_variable" href="classChannel.html#acbdb78e9206bff16329dc23989a424d8">poller_</a>-&gt;updateChannel(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    </div>
+<div class="ttc" id="aclassChannel_html_a0a7eb7be52a664f556c210e18df16d71"><div class="ttname"><a href="classChannel.html#a0a7eb7be52a664f556c210e18df16d71">Channel::fd_</a></div><div class="ttdeci">const int fd_</div><div class="ttdoc">该Channel对应的文件描述符fd。</div><div class="ttdef"><b>Definition</b> <a href="Channel_8h_source.html#l00046">Channel.h:46</a></div></div>
+<div class="ttc" id="aclassChannel_html_a5061cca1236d3a5ffd870eecfedd56a2"><div class="ttname"><a href="classChannel.html#a5061cca1236d3a5ffd870eecfedd56a2">Channel::readCb_</a></div><div class="ttdeci">Callback readCb_</div><div class="ttdoc">该Channel上注册的读事件回调函数。</div><div class="ttdef"><b>Definition</b> <a href="Channel_8h_source.html#l00058">Channel.h:58</a></div></div>
+<div class="ttc" id="aclassChannel_html_a67783d64fd2047b4e8d7f6f89391c70e"><div class="ttname"><a href="classChannel.html#a67783d64fd2047b4e8d7f6f89391c70e">Channel::events_</a></div><div class="ttdeci">uint32_t events_</div><div class="ttdoc">该Channel上注册的事件。</div><div class="ttdef"><b>Definition</b> <a href="Channel_8h_source.html#l00050">Channel.h:50</a></div></div>
+<div class="ttc" id="aclassChannel_html_ab1e535b4a525e05e3ac1fd377b616664"><div class="ttname"><a href="classChannel.html#ab1e535b4a525e05e3ac1fd377b616664">Channel::handleEvent</a></div><div class="ttdeci">void handleEvent(uint32_t revents)</div><div class="ttdef"><b>Definition</b> <a href="Channel_8cpp_source.html#l00024">Channel.cpp:24</a></div></div>
+<div class="ttc" id="aclassChannel_html_acbdb78e9206bff16329dc23989a424d8"><div class="ttname"><a href="classChannel.html#acbdb78e9206bff16329dc23989a424d8">Channel::poller_</a></div><div class="ttdeci">Poller * poller_</div><div class="ttdoc">拥有该Channel的Poller。</div><div class="ttdef"><b>Definition</b> <a href="Channel_8h_source.html#l00042">Channel.h:42</a></div></div>
+<div class="ttc" id="aclassPoller_html"><div class="ttname"><a href="classPoller.html">Poller</a></div><div class="ttdef"><b>Definition</b> <a href="Poller_8h_source.html#l00010">Poller.h:11</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>
