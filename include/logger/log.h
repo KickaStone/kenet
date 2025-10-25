@@ -23,8 +23,11 @@ template<size_t MaxLine>
 struct LogEntry {
     uint64_t ts_ns; // CLOCK_REALTIME_*(coarse)
     uint32_t tid; // hashed thread id
-    Level level;
+    Level level; // log level
     uint16_t len; // bytes used in msg
+    const char* file; // trace filename
+    const char* func; // trace function
+    int line; // trace line
     char msg[MaxLine]; //payload(formatted by producer)
 };
 
@@ -155,6 +158,33 @@ public:
         }
     }
 
+    void _logf_impl(Level lv, const char* file, int line, const char* func, const char* fmt, ...) {
+        auto* prod = get_or_create_producer();
+        Entry e{};
+        e.level = lv;
+        e.tid   = thread_id_hash();
+        e.ts_ns = now_ns_coarse();
+        e.file  = file;
+        e.func  = func;
+        e.line  = line;
+
+        char buf[MaxLine];
+        va_list ap; va_start(ap, fmt);
+        int n = vsnprintf(buf, sizeof(buf), fmt, ap);
+        va_end(ap);
+
+        if (n < 0) return;
+        if ((size_t)n >= sizeof(buf)) n = sizeof(buf) - 1;
+        e.len = static_cast<uint16_t>(n);
+        memcpy(e.msg, buf, e.len);
+
+        if (!prod->ring->try_push(e)) {
+            prod->dropped.fetch_add(1, std::memory_order_relaxed);
+        } else if (++wake_hint_ % 1024 == 0) {
+            cv_.notify_one();
+        }
+    }
+
     // 便捷宏风格
     template <typename... Args>
     void info(const char* fmt, Args... args) { logf(Level::Info, fmt, args...); }
@@ -265,10 +295,14 @@ private:
         char tbuf[32]; format_time(e.ts_ns, tbuf, sizeof(tbuf));
         char tidbuf[16]; int n = snprintf(tidbuf, sizeof(tidbuf), "%u", e.tid);
         std::string out;
-        out.reserve(e.len + 64);
+        out.reserve(e.len + 128);
         out.append("["); out.append(tbuf); out.append("][");
-        out.append(level_name(static_cast<Level>(e.level))); out.append("][tid:");
+        out.append(level_name(e.level)); out.append("][tid:");
         out.append(tidbuf, (n>0)?(size_t)n:0);
+        out.append("]["); out.append(e.file); out.append(":");
+        char lbuf[16]; snprintf(lbuf, sizeof(lbuf), "%d", e.line);
+        out.append(lbuf);
+        out.append(" "); out.append(e.func);
         out.append("] ");
         out.append(e.msg, e.len);
         out.push_back('\n');
@@ -381,11 +415,18 @@ private:
     std::atomic<uint32_t> wake_hint_{0};
 };
 
-#define LOG_TRACE(fmt, ...) AsyncLogger<>::instance().logf(Level::Trace, fmt, ##__VA_ARGS__)
-#define LOG_DEBUG(fmt, ...) AsyncLogger<>::instance().logf(Level::Debug, fmt, ##__VA_ARGS__)
-#define LOG_INFO(fmt, ...)  AsyncLogger<>::instance().logf(Level::Info,  fmt, ##__VA_ARGS__)
-#define LOG_WARN(fmt, ...)  AsyncLogger<>::instance().logf(Level::Warn,  fmt, ##__VA_ARGS__)
-#define LOG_ERROR(fmt, ...) AsyncLogger<>::instance().logf(Level::Error, fmt, ##__VA_ARGS__)
-#define LOG_FATAL(fmt, ...) AsyncLogger<>::instance().logf(Level::Fatal, fmt, ##__VA_ARGS__)
+// #define LOG_TRACE(fmt, ...) AsyncLogger<>::instance().logf(Level::Trace, fmt, ##__VA_ARGS__)
+// #define LOG_DEBUG(fmt, ...) AsyncLogger<>::instance().logf(Level::Debug, fmt, ##__VA_ARGS__)
+// #define LOG_INFO(fmt, ...)  AsyncLogger<>::instance().logf(Level::Info,  fmt, ##__VA_ARGS__)
+// #define LOG_WARN(fmt, ...)  AsyncLogger<>::instance().logf(Level::Warn,  fmt, ##__VA_ARGS__)
+// #define LOG_ERROR(fmt, ...) AsyncLogger<>::instance().logf(Level::Error, fmt, ##__VA_ARGS__)
+// #define LOG_FATAL(fmt, ...) AsyncLogger<>::instance().logf(Level::Fatal, fmt, ##__VA_ARGS__)
+
+#define LOG_TRACE(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Trace, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
+#define LOG_INFO(fmt, ...)  AsyncLogger<>::instance()._logf_impl(Level::Info, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
+#define LOG_WARN(fmt, ...)  AsyncLogger<>::instance()._logf_impl(Level::Warn, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
+#define LOG_ERROR(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Error, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
+#define LOG_DEBUG(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Debug, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
+#define LOG_FATAL(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Fatal, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
 
 #endif //LOG_H
