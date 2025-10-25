@@ -13,6 +13,8 @@
 #include <cstdlib>
 #include <fcntl.h>
 #include <vector>
+#include <atomic>
+#include <mutex>
 
 #include "sink.h"
 #include "ring_buffer.h"
@@ -41,8 +43,8 @@ struct Config {
     bool fsync_on_flush = false;
 
     // 等级控制（关键）
-    Level file_level    = Level::Info;
-    Level console_level = Level::Warn;
+    Level file_level    = Level::Off;   // 默认禁用文件输出
+    Level console_level = Level::Debug; // 默认控制台从Debug开始
 
     // console
     bool console_enable_color = true;
@@ -74,20 +76,21 @@ class AsyncLogger {
 public:
     static AsyncLogger& instance() {
         static AsyncLogger g;
-        // 自动启动logger（如果还没有启动）
-        if (!g.running_) {
-            g.start();
-            // 注册程序退出时的清理函数
-            std::atexit([]() { AsyncLogger::auto_stop(); });
-        }
         return g;
     }
 
     void start(Config cfg = Config::default_config()) {
         std::lock_guard<std::mutex> lk(mu_);
-        if (running_) return;
+        if (running_) {
+            // 如果已经运行，先停止再重新启动
+            running_ = false;
+            cv_.notify_all();
+            if (worker_.joinable()) worker_.join();
+            // 清理sinks
+            file_sink_.reset();
+            console_sink_.reset();
+        }
         cfg_ = std::move(cfg);
-        // open_file_locked();
 
         // init sinks
         file_sink_ = std::make_unique<FileSink>(cfg_.path, cfg_.fsync_on_flush, cfg_.rotate_bytes);
@@ -108,8 +111,9 @@ public:
         }
         cv_.notify_all();
         if (worker_.joinable()) worker_.join();
-        if (fd_ >= 0) ::close(fd_);
-        fd_ = -1;
+        // 清理sinks
+        file_sink_.reset();
+        console_sink_.reset();
     }
 
     ~AsyncLogger() { stop(); }
@@ -123,42 +127,20 @@ public:
         }
     }
 
-    // 可在任意线程调用
-    void logf(Level lv, const char* fmt, ...) {
-        auto* prod = get_or_create_producer();
-        Entry e{};
-        e.level = static_cast<Level>(lv);
-        e.tid   = thread_id_hash();
-        e.ts_ns = now_ns_coarse();
-
-        char buf[MaxLine];
-        va_list ap; va_start(ap, fmt);
-        int n = vsnprintf(buf, sizeof(buf), fmt, ap);
-        va_end(ap);
-        if (n < 0) return;
-
-        if (static_cast<size_t>(n) >= sizeof(buf)) {
-            // 截断并标注
-            constexpr const char* tail = "...(trunc)";
-            size_t keep = sizeof(buf) - 1;
-            size_t tl   = strlen(tail);
-            if (keep > tl) {
-                memcpy(buf + keep - tl, tail, tl);
-            }
-            n = static_cast<int>(keep);
-        }
-        e.len = static_cast<uint16_t>(n);
-        memcpy(e.msg, buf, e.len);
-
-        if (!prod->ring->try_push(e)) {
-            prod->dropped.fetch_add(1, std::memory_order_relaxed);
-        } else {
-            // 轻量唤醒：避免纯自旋
-            if (++wake_hint_ % 1024 == 0) cv_.notify_one();
-        }
-    }
+    
 
     void _logf_impl(Level lv, const char* file, int line, const char* func, const char* fmt, ...) {
+        // 智能启动：如果还没有启动，使用默认配置启动
+        if (!running_.load()) {
+            static std::once_flag once;
+            std::call_once(once, [this]() {
+                start(); // 使用默认配置启动
+                // 注册程序退出时的清理函数
+                std::atexit([]() { AsyncLogger::auto_stop(); });
+            });
+        }
+
+
         auto* prod = get_or_create_producer();
         Entry e{};
         e.level = lv;
@@ -184,14 +166,6 @@ public:
             cv_.notify_one();
         }
     }
-
-    // 便捷宏风格
-    template <typename... Args>
-    void info(const char* fmt, Args... args) { logf(Level::Info, fmt, args...); }
-    template <typename... Args>
-    void warn(const char* fmt, Args... args) { logf(Level::Warn, fmt, args...); }
-    template <typename... Args>
-    void error(const char* fmt, Args... args) { logf(Level::Error, fmt, args...); }
 
     // 统计
     uint64_t dropped_total() const {
@@ -415,18 +389,13 @@ private:
     std::atomic<uint32_t> wake_hint_{0};
 };
 
-// #define LOG_TRACE(fmt, ...) AsyncLogger<>::instance().logf(Level::Trace, fmt, ##__VA_ARGS__)
-// #define LOG_DEBUG(fmt, ...) AsyncLogger<>::instance().logf(Level::Debug, fmt, ##__VA_ARGS__)
-// #define LOG_INFO(fmt, ...)  AsyncLogger<>::instance().logf(Level::Info,  fmt, ##__VA_ARGS__)
-// #define LOG_WARN(fmt, ...)  AsyncLogger<>::instance().logf(Level::Warn,  fmt, ##__VA_ARGS__)
-// #define LOG_ERROR(fmt, ...) AsyncLogger<>::instance().logf(Level::Error, fmt, ##__VA_ARGS__)
-// #define LOG_FATAL(fmt, ...) AsyncLogger<>::instance().logf(Level::Fatal, fmt, ##__VA_ARGS__)
-
+// 带文件位置信息的宏（推荐使用）
 #define LOG_TRACE(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Trace, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
+#define LOG_DEBUG(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Debug, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
 #define LOG_INFO(fmt, ...)  AsyncLogger<>::instance()._logf_impl(Level::Info, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
 #define LOG_WARN(fmt, ...)  AsyncLogger<>::instance()._logf_impl(Level::Warn, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
 #define LOG_ERROR(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Error, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
-#define LOG_DEBUG(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Debug, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
 #define LOG_FATAL(fmt, ...) AsyncLogger<>::instance()._logf_impl(Level::Fatal, __FILE__, __LINE__, __func__, fmt, ##__VA_ARGS__)
+
 
 #endif //LOG_H

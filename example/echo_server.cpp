@@ -66,7 +66,7 @@ int main() {
     Config cfg;
     cfg.path = "server.log";
     cfg.file_level = Level::Debug;   // file log from Debug
-    cfg.console_level = Level::Info; // console log from Info+
+    cfg.console_level = Level::Warn; // console log from Info+
     cfg.flush_bytes = 128<<10;
     cfg.flush_interval = std::chrono::milliseconds(100);
     cfg.console_enable_color = true;

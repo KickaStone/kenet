@@ -21,6 +21,8 @@ int main() {
 }
 ```
 
+**注意**：如果需要在程序开始时自定义配置，请在第一次使用日志宏之前调用`start()`方法。
+
 ### 手动管理（如果需要自定义配置）
 
 如果需要自定义配置，可以手动管理生命周期：
@@ -44,6 +46,8 @@ int main() {
     return 0;
 }
 ```
+
+**重要**：如果logger已经通过自动启动运行，调用`start(cfg)`会先停止当前logger，然后用新配置重新启动。
 
 ### 默认配置说明
 
@@ -92,18 +96,27 @@ int main() {
 ## 使用方式
 
 ### 宏方式（推荐）
+
+#### 带文件位置信息的宏（推荐用于调试）
 ```cpp
-LOG_DEBUG("Debug: %d", value);
+LOG_DEBUG("Debug: %d", value);        // 包含文件名、行号、函数名
 LOG_INFO("Info: %s", message);
 LOG_WARN("Warning: %.2f", percentage);
 LOG_ERROR("Error: %s", error_msg);
 ```
 
+#### 不带文件位置信息的宏（性能更好）
+```cpp
+LOG_DEBUG_SIMPLE("Debug: %d", value); // 不包含文件位置信息，性能更好
+LOG_INFO_SIMPLE("Info: %s", message);
+LOG_WARN_SIMPLE("Warning: %.2f", percentage);
+LOG_ERROR_SIMPLE("Error: %s", error_msg);
+```
+
 ### 实例方法
 ```cpp
 auto& logger = AsyncLogger<>::instance();
-logger.debug("Debug message");
-logger.info("Info message");
+logger.info("Info message");   // 不包含文件位置信息
 logger.warn("Warning message");
 logger.error("Error message");
 ```

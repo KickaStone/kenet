@@ -27,7 +27,7 @@ int main() {
         for (int t = 0; t < num_threads; ++t) {
             ths.emplace_back([t, &L, logs_per_round, num_threads] {
                 for (int i = 0; i < logs_per_round / num_threads; ++i) {
-                    L.info("worker=%d value=%d hello async logger!", t, i);
+                    LOG_INFO("worker=%d value=%d hello async logger!", t, i);
                 }
             });
         }
