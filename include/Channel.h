@@ -16,6 +16,7 @@ class Channel : public std::enable_shared_from_this<Channel>{
     public:
         using Callback = std::function<void()>;
         Channel(Poller* poller, int fd);
+        ~Channel();
         void setReadCallback(Callback cb);
         void setWriteCallback(Callback cb);
         void setCloseCallback(Callback cb);

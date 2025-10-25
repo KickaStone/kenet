@@ -5,6 +5,11 @@
 Channel::Channel(Poller* poller, int fd)
     : poller_(poller), fd_(fd) {}
 
+Channel::~Channel() {
+    close(fd_);
+}
+
+
 void Channel::setReadCallback(Callback cb) {
     readCb_ = cb;
 }
