@@ -10,6 +10,8 @@
 #include <functional>
 #include <atomic>
 
+#include "logger/log.h"
+
 class ThreadPool {
     public:
     explicit ThreadPool();
@@ -36,7 +38,7 @@ inline ThreadPool::ThreadPool() : ThreadPool(std::thread::hardware_concurrency()
 inline ThreadPool::ThreadPool(size_t threads) : stop_(false) {
     for (size_t i = 0; i < threads; ++i) {
         workers_.emplace_back([this] {
-            while (!stop_) {
+            for (;;) {
                 std::function<void()> task;
                 {
                     std::unique_lock<std::mutex> lock(mutex_);
@@ -47,14 +49,24 @@ inline ThreadPool::ThreadPool(size_t threads) : stop_(false) {
                     task = std::move(this->tasks_.front());
                     this->tasks_.pop();
                 }
-                task();
+                try {
+                    task();
+                } catch (const std::exception& e) {
+                    LOG_ERROR("Exception occurred during task()", e);
+                } catch (...) {
+                    // 放置线程退出
+                    LOG_ERROR("catch exception");
+                }
             }
         });
     }
 }
 
 inline ThreadPool::~ThreadPool() {
-    stop_ = true;
+    {
+        std::lock_guard lock(mutex_);
+        stop_ = true;
+    }
     condition_.notify_all();
     for (std::thread& worker : workers_) {
         if (worker.joinable())
@@ -71,10 +83,9 @@ auto ThreadPool::enqueue(F &&f, Args &&... args) -> std::future<typename std::re
 
     std::future<return_type> res = task->get_future();
     {
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::lock_guard lock(mutex_);
         if (stop_) throw std::runtime_error("enqueue on stopped ThreadPool");
         tasks_.emplace([task]() { (*task)(); });
-
     }
     condition_.notify_one();
     return res;

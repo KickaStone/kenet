@@ -39,7 +39,7 @@ private:
 
     EventLoop *loop_;
     const int fd_;
-    std::unique_ptr<Channel> channel_;
+    std::shared_ptr<Channel> channel_;
     enum State
     {
         kConnecting,

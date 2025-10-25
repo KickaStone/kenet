@@ -8,19 +8,19 @@
 #include "Channel.h"
 #include "InetAddress.h"
 
-class Acceptor
+class Acceptor : public std::enable_shared_from_this<Acceptor>
 {
 public:
     using NewConnFn = std::function<void(int fd, const InetAddress &peer)>;
-    Acceptor(EventLoop *loop, const InetAddress &addr);
+    Acceptor(std::shared_ptr<EventLoop> loop, const InetAddress &addr);
     void setNewConnCallback(NewConnFn fn) { cb_ = std::move(fn); }
     void Listen();
 private:
     void handleAccept();               // accept connections until EAGAIN
-    EventLoop *loop_;                  // eventloop
+    std::shared_ptr<EventLoop> loop_;                  // eventloop
     InetAddress addr_;                 // listen address
     int listenfd_;                     // listen socket fd
-    std::unique_ptr<Channel> channel_; // channel to accept connections
+    std::shared_ptr<Channel> channel_; // channel to accept connections
     NewConnFn cb_;                     // new connection callback
 };
 

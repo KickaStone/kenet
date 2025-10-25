@@ -3,7 +3,7 @@
 
 
 TcpConnection::TcpConnection(EventLoop* loop, int fd, InetAddress local, InetAddress peer) : loop_(loop), fd_(fd), local_(local), peer_(peer) {
-    channel_ = std::make_unique<Channel>(&loop_->poller(), fd);
+    channel_ = std::make_shared<Channel>(&loop_->poller(), fd);
     channel_->setReadCallback(std::bind(&TcpConnection::handleRead, this));
     channel_->setWriteCallback(std::bind(&TcpConnection::handleWrite, this));
     channel_->setCloseCallback(std::bind(&TcpConnection::handleClose, this));
@@ -16,6 +16,7 @@ TcpConnection::~TcpConnection() {
 
 void TcpConnection::connectEstablished() {
     state_ = kConnected;
+    channel_->tie(shared_from_this());  // 在对象创建后设置 tie
     channel_->enableReading();
     if (onConn_) {
         onConn_(shared_from_this());

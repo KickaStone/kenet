@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.dbclient-js": "javascript",
+        "*.hbs": "handlebars",
         "cctype": "cpp",
         "cmath": "cpp",
         "cstdarg": "cpp",
@@ -76,6 +77,7 @@
         "span": "cpp",
         "cinttypes": "cpp",
         "__availability": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "chrono": "cpp"
     }
 }

@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <cstdint>
+#include <memory>
 #include <sys/epoll.h>
 
 // 前向声明
@@ -11,7 +12,7 @@ class Poller;
 /**
  * @brief Channel类是对文件描述符的封装，一个Channel对应一个文件描述符fd。同时Channel类也注册了该fd上的事件回调函数。
  */
-class Channel {
+class Channel : public std::enable_shared_from_this<Channel>{
     public:
         using Callback = std::function<void()>;
         Channel(Poller* poller, int fd);
@@ -26,7 +27,7 @@ class Channel {
         void disableAll() { events_ = 0; update(); }
         void update();
     
-        void handleEvent(uint32_t revents); // 由 Poller 调用
+        void handleEvent() const; // 由 Poller 调用
         int fd() const { return fd_; }
         uint32_t events() const { return events_; }
         uint32_t revents() const { return revents_; }
@@ -34,6 +35,7 @@ class Channel {
         void setRevents(uint32_t revents) { revents_ = revents; }
         void setAdded(bool added) { added_ = added; }
         bool added() const { return added_; }
+        void tie(const std::shared_ptr<void> &owner) { tie_ = owner; }
 
     private:
         /**
@@ -57,6 +59,7 @@ class Channel {
          */
         Callback readCb_, writeCb_, closeCb_, errorCb_;
         bool added_{false}; // 是否已在 epoll 中
+        std::weak_ptr<void> tie_;
     };
     
 

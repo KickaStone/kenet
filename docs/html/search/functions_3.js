@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['toip_0',['toIp',['../classInetAddress.html#a70e441b51cb2b3fa143dbb3beb25f514',1,'InetAddress']]],
-  ['toipport_1',['toIpPort',['../classInetAddress.html#ab3217fb582da1932adf6720955a8731a',1,'InetAddress']]],
-  ['toport_2',['toPort',['../classInetAddress.html#ab50481a245c73efbff010406eec7e965',1,'InetAddress']]]
+  ['poll_0',['poll',['../classPoller.html#a550dcb1b133fdc69e582e7b2aef8b2e1',1,'Poller']]],
+  ['poller_1',['Poller',['../classPoller.html#adf6d69ebc50dec9403c330c173507fb6',1,'Poller']]]
 ];

@@ -3,9 +3,11 @@
 #include <unistd.h>
 #include <errno.h>
 
+#include <utility>
+
 #include "logger/log.h"
 
-Acceptor::Acceptor(EventLoop* loop, const InetAddress& addr) : loop_(loop), addr_(addr) {
+Acceptor::Acceptor(std::shared_ptr<EventLoop> loop, const InetAddress& addr) : loop_(std::move(loop)), addr_(addr) {
     listenfd_ = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
     if (listenfd_ < 0) {
         LOG_FATAL("socket failed");
@@ -26,6 +28,8 @@ void Acceptor::Listen() {
         LOG_FATAL("bind failed: %s (errno: %d)", strerror(errno), errno);
         exit(1);
     }
+    
+    channel_->tie(shared_from_this());  // 在对象创建后设置 tie
     channel_->enableReading();
 
     ret = listen(listenfd_, 1024);

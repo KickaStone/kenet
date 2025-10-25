@@ -21,26 +21,29 @@ void Channel::setErrorCallback(Callback cb) {
     errorCb_ = cb;
 }
 
-void Channel::handleEvent(uint32_t revents) {
+void Channel::handleEvent() const {
     /**
      * @brief 根据发生的事件，调用相应的回调函数。
      * @param revents 发生的事件。
      */
-    if (revents & EPOLLIN) {
-        LOG_INFO("Channel::handleEvent: EPOLLIN on fd: %d", fd_);
-        if (readCb_) readCb_();
-    }
-    if (revents & EPOLLOUT) {
-        LOG_INFO("Channel::handleEvent: EPOLLOUT on fd: %d", fd_);
-        if (writeCb_) writeCb_();
-    }
-    if (revents & EPOLLRDHUP) {
-        LOG_INFO("Channel::handleEvent: EPOLLRDHUP on fd: %d", fd_);
-        if (closeCb_) closeCb_();
-    }
-    if (revents & EPOLLERR) {
-        LOG_INFO("Channel::handleEvent: EPOLLERR on fd: %d", fd_);
-        if (errorCb_) errorCb_();
+    std::shared_ptr<void> guard = tie_.lock();
+    if (guard) {
+        if (revents_ & EPOLLIN) {
+            LOG_INFO("Channel::handleEvent: EPOLLIN on fd: %d", fd_);
+            if (readCb_) readCb_();
+        }
+        if (revents_ & EPOLLOUT) {
+            LOG_INFO("Channel::handleEvent: EPOLLOUT on fd: %d", fd_);
+            if (writeCb_) writeCb_();
+        }
+        if (revents_ & EPOLLRDHUP) {
+            LOG_INFO("Channel::handleEvent: EPOLLRDHUP on fd: %d", fd_);
+            if (closeCb_) closeCb_();
+        }
+        if (revents_ & EPOLLERR) {
+            LOG_INFO("Channel::handleEvent: EPOLLERR on fd: %d", fd_);
+            if (errorCb_) errorCb_();
+        }
     }
 }
 
@@ -50,6 +53,6 @@ void Channel::setEvents(uint32_t events) {
 }
 
 void Channel::update() {
-    poller_->updateChannel(this);
+    poller_->updateChannel(this->shared_from_this());
 }
     

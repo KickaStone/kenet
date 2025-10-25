@@ -78,14 +78,25 @@ $(function() {
   <div class="headertitle"><div class="title">Poller类 参考</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Poller是epoll创建的文件描述符的封装，负责监听文件描述符上的事件。  
+ <a href="classPoller.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Poller_8h_source.html">Poller.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
+<tr class="memitem:adf6d69ebc50dec9403c330c173507fb6" id="r_adf6d69ebc50dec9403c330c173507fb6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoller.html#adf6d69ebc50dec9403c330c173507fb6">Poller</a> ()</td></tr>
+<tr class="memdesc:adf6d69ebc50dec9403c330c173507fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建Poller时调用epoll_create1创建epoll文件描描述符。设置为EPOLL_CLOEXEC主要是提高安全性。在CLOEXEC模式下，进程fork或调用exec执行一个新程序时，内核自动关闭文件描述符。  <br /></td></tr>
+<tr class="separator:adf6d69ebc50dec9403c330c173507fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec00f68390616b738bfd998b0fd2b8dc" id="r_aec00f68390616b738bfd998b0fd2b8dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoller.html#aec00f68390616b738bfd998b0fd2b8dc">updateChannel</a> (<a class="el" href="classChannel.html">Channel</a> *ch)</td></tr>
+<tr class="memdesc:aec00f68390616b738bfd998b0fd2b8dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用epoll_ctl添加或修改监听的channel对应的fd。  <br /></td></tr>
 <tr class="separator:aec00f68390616b738bfd998b0fd2b8dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2df6838f33ef0543cfe9bba1f009f59b" id="r_a2df6838f33ef0543cfe9bba1f009f59b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoller.html#a2df6838f33ef0543cfe9bba1f009f59b">removeChannel</a> (<a class="el" href="classChannel.html">Channel</a> *ch)</td></tr>
+<tr class="memdesc:a2df6838f33ef0543cfe9bba1f009f59b"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用epoll_ctl删除监听的channel对应的fd。  <br /></td></tr>
 <tr class="separator:a2df6838f33ef0543cfe9bba1f009f59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a550dcb1b133fdc69e582e7b2aef8b2e1" id="r_a550dcb1b133fdc69e582e7b2aef8b2e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPoller.html#a550dcb1b133fdc69e582e7b2aef8b2e1">poll</a> (int timeoutMs, std::vector&lt; <a class="el" href="classChannel.html">Channel</a> * &gt; &amp;active)</td></tr>
+<tr class="memdesc:a550dcb1b133fdc69e582e7b2aef8b2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">收集epoll_wait返回的活跃事件，并将其添加到输入参数的活跃channel列表中。  <br /></td></tr>
 <tr class="separator:a550dcb1b133fdc69e582e7b2aef8b2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -101,8 +112,9 @@ Private 属性</h2></td></tr>
 <tr class="separator:a0897dc61d2f137d66b2b2cd97173ff7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
-<div class="textblock">
-<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00010">10</a> 行定义.</p>
+<div class="textblock"><p>Poller是epoll创建的文件描述符的封装，负责监听文件描述符上的事件。 </p>
+
+<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00014">14</a> 行定义.</p>
 </div><h2 class="groupheader">构造及析构函数说明</h2>
 <a id="adf6d69ebc50dec9403c330c173507fb6" name="adf6d69ebc50dec9403c330c173507fb6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf6d69ebc50dec9403c330c173507fb6">&#9670;&#160;</a></span>Poller()</h2>
@@ -127,7 +139,9 @@ Private 属性</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00005">5</a> 行定义.</p>
+<p>构建Poller时调用epoll_create1创建epoll文件描描述符。设置为EPOLL_CLOEXEC主要是提高安全性。在CLOEXEC模式下，进程fork或调用exec执行一个新程序时，内核自动关闭文件描述符。 </p>
+
+<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00008">8</a> 行定义.</p>
 
 </div>
 </div>
@@ -146,7 +160,7 @@ Private 属性</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00014">14</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00017">17</a> 行定义.</p>
 
 </div>
 </div>
@@ -177,7 +191,17 @@ Private 属性</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00040">40</a> 行定义.</p>
+<p>收集epoll_wait返回的活跃事件，并将其添加到输入参数的活跃channel列表中。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeoutMs</td><td>等待事件的超时时间，单位为毫秒。 </td></tr>
+    <tr><td class="paramname">active</td><td>活跃channel列表。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回收集到的活跃事件数量。 -1 表示发生错误。 0 表示没有事件发生。 大于0 表示收集到的活跃事件数量。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00059">59</a> 行定义.</p>
 
 </div>
 </div>
@@ -197,7 +221,15 @@ Private 属性</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00018">18</a> 行定义.</p>
+<p>使用epoll_ctl删除监听的channel对应的fd。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ch</td><td>要删除的channel。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00025">25</a> 行定义.</p>
 
 </div>
 </div>
@@ -217,7 +249,15 @@ Private 属性</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00024">24</a> 行定义.</p>
+<p>使用epoll_ctl添加或修改监听的channel对应的fd。 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ch</td><td>要添加或修改的channel。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="Poller_8cpp_source.html">Poller.cpp</a> 第 <a class="el" href="Poller_8cpp_source.html#l00035">35</a> 行定义.</p>
 
 </div>
 </div>
@@ -242,7 +282,7 @@ Private 属性</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00019">19</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00023">23</a> 行定义.</p>
 
 </div>
 </div>
@@ -266,7 +306,7 @@ Private 属性</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00021">21</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00025">25</a> 行定义.</p>
 
 </div>
 </div>
@@ -290,7 +330,7 @@ Private 属性</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00020">20</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="Poller_8h_source.html">Poller.h</a> 第 <a class="el" href="Poller_8h_source.html#l00024">24</a> 行定义.</p>
 
 </div>
 </div>

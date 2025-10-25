@@ -13,13 +13,13 @@ int main() {
         return 1;
     }
     
-    struct sockaddr_in server_addr;
+    sockaddr_in server_addr;
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(9000);
     server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
     
-    if (connect(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
+    if (connect(sockfd, (sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
         std::cerr << "connect failed" << std::endl;
         close(sockfd);
         return 1;
