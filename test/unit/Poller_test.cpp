@@ -23,7 +23,7 @@ TEST_F(PollerTest, update_channel_test) {
     Channel channel(&poller, pipefd[0]);
     
     channel.setEvents(EPOLLIN);
-    poller.updateChannel(&channel);
+    poller.updateChannel(std::make_shared<Channel>(channel));
     
     EXPECT_TRUE(channel.added());
     
@@ -37,7 +37,7 @@ TEST_F(PollerTest, update_channel_test) {
     EXPECT_EQ(activeChannels[0]->fd(), pipefd[0]);
     EXPECT_EQ(activeChannels[0]->revents(), EPOLLIN);
     
-    poller.removeChannel(&channel);
+    poller.removeChannel(std::make_shared<Channel>(channel));
     EXPECT_FALSE(channel.added());
     
     close(pipefd[0]);
@@ -51,7 +51,7 @@ TEST_F(PollerTest, epollout_test) {
     Channel channel(&poller, pipefd[1]);
     
     channel.setEvents(EPOLLOUT);
-    poller.updateChannel(&channel);
+    poller.updateChannel(std::make_shared<Channel>(channel));
     
     std::vector<Channel*> activeChannels;
     int nfds = poller.poll(1000, activeChannels);
@@ -61,7 +61,7 @@ TEST_F(PollerTest, epollout_test) {
     EXPECT_EQ(activeChannels[0]->fd(), pipefd[1]);
     EXPECT_EQ(activeChannels[0]->revents(), EPOLLOUT);
     
-    poller.removeChannel(&channel);
+    poller.removeChannel(std::make_shared<Channel>(channel));
     close(pipefd[0]);
     close(pipefd[1]);
 }
@@ -76,12 +76,12 @@ TEST_F(PollerTest, channel_state_test) {
     EXPECT_EQ(channel.events(), 0);
     
     channel.setEvents(EPOLLIN);
-    poller.updateChannel(&channel);
+    poller.updateChannel(std::make_shared<Channel>(channel));
     
     EXPECT_TRUE(channel.added());
     EXPECT_EQ(channel.events(), EPOLLIN);
     
-    poller.removeChannel(&channel);
+    poller.removeChannel(std::make_shared<Channel>(channel));
     EXPECT_FALSE(channel.added());
     EXPECT_EQ(channel.events(), EPOLLIN);
     
