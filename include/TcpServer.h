@@ -42,6 +42,7 @@ class TcpServer {
         // 线程管理
         std::unique_ptr<std::thread> serverThread_;
         std::atomic<bool> running_{false};
+        std::atomic<uint64_t> totalConnections_{0};
     };
     
 

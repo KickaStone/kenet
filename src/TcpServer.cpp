@@ -24,7 +24,8 @@ TcpServer::~TcpServer() {
 }
 
 void TcpServer::onNewConn(int fd, const InetAddress& peer) {
-    LOG_INFO("TcpServer::onNewConn: new connection from %s", peer.toIpPort().c_str());
+    totalConnections_.fetch_add(1);
+    LOG_INFO("TcpServer::onNewConn: new connection from %s, total connections: %lu", peer.toIpPort().c_str(), totalConnections_.load());
     
     // get server local address
     sockaddr_in localAddr{};
@@ -46,7 +47,9 @@ void TcpServer::removeConn(const TcpConnection::Ptr& conn) {
     loop_->runInLoop([this,conn]() {
         mu.lock();
         conns_.erase(conn->fd());
+        totalConnections_.fetch_sub(1);
         mu.unlock();
+        LOG_INFO("TcpServer::removeConn: total connections: %lu", totalConnections_.load());
     });
 }
 

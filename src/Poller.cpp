@@ -66,6 +66,7 @@ int Poller::poll(int timeoutMs, std::vector<Channel*>& active) {
         return -1;
     }
     for (int i = 0; i < nfds; ++i) {
+        LOG_INFO("Poller::poll: event %d: %d", i, events_[i].events);
         auto* ch = reinterpret_cast<Channel*>(events_[i].data.ptr);
         ch->setRevents(events_[i].events);
         active.push_back(ch);

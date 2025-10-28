@@ -52,6 +52,7 @@ private:
 
     MessageCb onMessage_;
     EventCb onConn_, onClose_, onWriteComplete_;
+    std::chrono::steady_clock::time_point establishTime_{std::chrono::steady_clock::now()};
 };
 
 #endif

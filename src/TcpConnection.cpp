@@ -12,12 +12,15 @@ TcpConnection::TcpConnection(EventLoop* loop, int fd, InetAddress local, InetAdd
 
 TcpConnection::~TcpConnection() {
     channel_->disableAll();
+    auto durationMs = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - establishTime_).count();
+    LOG_DEBUG("TcpConnection::~TcpConnection: fd=%d, duration=%ldms", fd_, durationMs);
 }
 
 void TcpConnection::connectEstablished() {
     state_ = kConnected;
     channel_->tie(shared_from_this());  // 在对象创建后设置 tie
     channel_->enableReading();
+    LOG_INFO("TcpConnection::connectEstablished: fd=%d, state=%d", fd_, state_);
     if (onConn_) {
         onConn_(shared_from_this());
     }
@@ -86,7 +89,7 @@ void TcpConnection::handleRead() {
                 LOG_ERROR("TcpConnection::handleRead: read failed: %s", strerror(errno));
                 handleError();
             } else {
-                LOG_INFO("TcpConnection::handleRead: EAGAIN/EWOULDBLOCK");
+                LOG_INFO("TcpConnection::handleRead: EAGAIN/EWOULDBLOCK"); // no data to read
             }
         }
     }
@@ -112,6 +115,7 @@ void TcpConnection::handleWrite() {
 }
 
 void TcpConnection::handleClose() {
+    LOG_INFO("TcpConnection::handleClose: fd=%d, state=%d", fd_, state_);
     state_ = kDisconnected;
     channel_->disableAll();
     if (onClose_) {

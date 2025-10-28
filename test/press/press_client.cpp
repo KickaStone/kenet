@@ -106,6 +106,8 @@ private:
             buffer[received] = '\0';
             // 验证响应是否正确
             if (std::string(buffer) == message) {
+                // print the response
+             	//   std::cout << "Thread " << thread_id << " Request " << request_id << ": response: " << std::string(buffer) << std::endl;
                 return true;  // 只有收到正确响应才算成功
             } else {
                 std::cerr << "Thread " << thread_id << " Request " << request_id << ": response mismatch" << std::endl;

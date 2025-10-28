@@ -22,7 +22,6 @@ class EventLoop {
         void quit();                // 设置 quit_ = true
         [[nodiscard]] bool isInLoopThread() const { return std::this_thread::get_id() == tid_; }
         void runInLoop(std::function<void()> cb);
-        void queueInLoop(std::function<void()> cb);
         Poller& poller() { return poller_; }
         void updateChannel(Channel* ch) const { poller_.updateChannel(ch->shared_from_this()); }
         void removeChannel(Channel* ch) const { poller_.removeChannel(ch->shared_from_this()); }
@@ -33,8 +32,6 @@ class EventLoop {
         std::mutex mutex_;
         std::vector<std::function<void()>> pendingFuncs_;
         static constexpr int pollTimeoutMs_ = 1000;
-        void doPendingFuncs();
-
         ThreadPool threadPool_{4ul};
 };
 #endif

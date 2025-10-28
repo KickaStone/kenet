@@ -18,16 +18,13 @@ void EventLoop::loop() {
             LOG_ERROR("EventLoop::loop: poll failed");
         }
         for (const auto& ch : activeChannels_) {
-            threadPool_.enqueue([ch]() {
-                ch->handleEvent();
-            });
+            // threadPool_.enqueue([ch]() {
+            //     ch->handleEvent();
+            // });
+            ch->handleEvent();
         }
         activeChannels_.clear();
-        doPendingFuncs();
     }
-
-    // ensure all pending tasks are executed
-    doPendingFuncs();
     LOG_INFO("EventLoop::loop: end loop in thread: %lu", std::hash<std::thread::id>{}(tid_));
 }
 
@@ -36,27 +33,5 @@ void EventLoop::quit() {
 }
 
 void EventLoop::runInLoop(std::function<void()> cb) {
-    if (isInLoopThread()) {
-        cb();
-    } else {
-        queueInLoop(cb);
-    }
-}
-
-void EventLoop::queueInLoop(std::function<void()> cb) {
-    std::unique_lock<std::mutex> lock(mutex_);
-    pendingFuncs_.push_back(cb);
-}
-
-void EventLoop::doPendingFuncs() {
-    // switch pendingFuncs_ with empty vector
-    std::vector<std::function<void()>> funcs;
-    {
-        std::unique_lock<std::mutex> lock(mutex_);
-        funcs.swap(pendingFuncs_);
-    }
-    // Use thread pool to execute the functions
-    for (auto& func : funcs) {
-        threadPool_.enqueue(func);
-    }
+    threadPool_.enqueue(cb);
 }
